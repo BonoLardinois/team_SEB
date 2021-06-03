@@ -32,8 +32,7 @@ class Land():
                 
                 # making water class
                 water = Water(left_bottom_tuple, top_right_tuple)
-                print(water.left_bottom)
-                print(water.top_right)
+                return water
 
     def load_houses(self):
 

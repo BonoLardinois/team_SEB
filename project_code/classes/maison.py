@@ -1,6 +1,7 @@
 class Maison():
 
     def __init__(self, coordinates):
+        self.name = "maison"
         self.width = 24
         self.depth = 22
         self.price = 610000
