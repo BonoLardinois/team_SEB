@@ -1,18 +1,19 @@
 import csv
-
+import random
 from .water import Water
 from .familyhome import Familyhome
 from .bungalow import Bungalow
 from .maison import Maison
+from project_code.algorithms.randomise import randomise_coordinates
 
 class Land():
 
     def __init__(self, source_file):
         self.width = 180
         self.depth = 160
-        self.load_water(source_file)
-        self.load_houses()
+        self.water = self.load_water(source_file)
         self.houses = []
+        self.load_houses()
     
     def load_water(self, source_file):
         
@@ -26,8 +27,8 @@ class Land():
                 top_right = row[2]
 
                 # 
-                left_bottom_tuple = tuple((left_bottom.split(',')[0], left_bottom.split(',')[1]))
-                top_right_tuple = tuple((top_right.split(',')[0], top_right.split(',')[1]))
+                left_bottom_tuple = tuple((int(left_bottom.split(',')[0]), int(left_bottom.split(',')[1])))
+                top_right_tuple = tuple((int(top_right.split(',')[0]), int(top_right.split(',')[1])))
                 
                 # making water class
                 water = Water(left_bottom_tuple, top_right_tuple)
@@ -37,17 +38,22 @@ class Land():
     def load_houses(self):
 
         for i in range(12):
-            familyhome = Familyhome()
+            coordinates = randomise_coordinates()
+            familyhome = Familyhome(coordinates)
+            # print(familyhome.bottom_left)
             self.houses.append(familyhome)
 
         for i in range(5):
-            bungalow = Bungalow()
+            coordinates = randomise_coordinates()
+            bungalow = Bungalow(coordinates)
+            # print(bungalow.bottom_left)
             self.houses.append(bungalow)
             
         for i in range(3):
-            maison = Maison()
+            coordinates = randomise_coordinates()
+            maison = Maison(coordinates)
+            # print(maison.bottom_left)
             self.houses.append(maison)
         
-        print(self.houses)
-        
+
 

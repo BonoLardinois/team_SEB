@@ -1,11 +1,13 @@
 class Maison():
 
-    def __init__(self):
+    def __init__(self, coordinates):
         self.width = 24
         self.depth = 22
         self.price = 610000
-        self.x = None
-        self.y = None
+        self.bottom_left = coordinates
 
     def get_price(self):
         pass
+    
+    def __str__(self):
+        return 'maison'
