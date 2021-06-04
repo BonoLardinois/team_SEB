@@ -11,6 +11,7 @@ class Land():
     def __init__(self, source_file, number_houses):
         self.width = 180
         self.depth = 160
+        self.waters = []
         self.water = self.load_water(source_file)
         self.houses = []
         self.load_houses(number_houses)
@@ -22,7 +23,8 @@ class Land():
             reader = csv.reader(in_file)
             next(reader)
             
-            for row in reader: 
+            for row in reader:
+                print(row)
                 # water_number = row['water_data'].split(',')[0]
                 left_bottom = row[1]
                 top_right = row[2]
@@ -33,7 +35,8 @@ class Land():
                 
                 # making water class
                 water = Water(left_bottom_tuple, top_right_tuple)
-                return water
+                self.waters.append(water)
+        return self.waters
 
     def load_houses(self, number_houses):
 
