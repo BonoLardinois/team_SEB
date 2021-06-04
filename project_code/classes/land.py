@@ -20,24 +20,14 @@ class Land():
 
     def overlap(self, house):
         for coordinate in self.all_coordinates:
-            print(house.bottom_left)
 
             new_house = Polygon([house.bottom_left, (house.bottom_left[0] + house.width, house.bottom_left[1]), house.top_right, (house.bottom_left[0], house.bottom_left[1] + house.depth)])
-            existing_house = Polygon([coordinate[0], (coordinate[0][0] + house.width, coordinate[0][1]), coordinate[1], (coordinate[0][0], coordinate[0][1] + house.depth)])
+            existing_land = Polygon([coordinate[0], (coordinate[0][0] + coordinate[1][0] - coordinate[0][0], coordinate[0][1]), coordinate[1], (coordinate[0][0], coordinate[0][1] + coordinate[1][1] - coordinate[0][1])])
             
 
-            if new_house.intersects(existing_house) == True:
+            if existing_land.intersects(new_house) == True:
                 return True
-
-            # print((house.bottom_left[0], coordinate[0][0], house.bottom_left[1], coordinate[0][1], house.top_right[0], coordinate[1][0] + house.width, house.top_right[1], coordinate[1][1], house.depth))
-            # if (house.bottom_left[0] > coordinate[0][0] and house.bottom_left[1] > coordinate[0][1] and house.top_right[0] < coordinate[1][0] + house.width and house.top_right[1] < coordinate[1][1] + house.depth):
-            #     print("is overlap")
-            #     return True 
       
-        
-        # p1 = Polygon([(0,0), (1,1), (1,0)])
-        # p2 = Polygon([(0,1), (1,0), (1,1)])
-        # print(p1.intersects(p2))
         self.houses.append(house)
         self.all_coordinates.append(tuple((house.bottom_left, house.top_right)))
      
