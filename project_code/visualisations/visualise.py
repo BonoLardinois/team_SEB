@@ -21,10 +21,10 @@ def visualise(houses, waters):
             ax.add_patch(house_rect)   
 
     for water in waters:
-        top_right_x = water.top_right[0] - water.left_bottom[0]
-        top_right_y = water.top_right[1] - water.left_bottom[1]
+        top_right_x = water.top_right[0] - water.bottom_left[0]
+        top_right_y = water.top_right[1] - water.bottom_left[1]
         
-        water_rect = patches.Rectangle((water.left_bottom[0], water.left_bottom[1]), top_right_x, top_right_y, linewidth=1, edgecolor='b', facecolor='none')
+        water_rect = patches.Rectangle((water.bottom_left[0], water.bottom_left[1]), top_right_x, top_right_y, linewidth=1, edgecolor='b', facecolor='none')
         ax.add_patch(water_rect) 
 
     

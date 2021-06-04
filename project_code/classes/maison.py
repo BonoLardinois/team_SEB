@@ -6,6 +6,8 @@ class Maison():
         self.depth = 22
         self.price = 610000
         self.bottom_left = coordinates
+        self.top_right = tuple((self.bottom_left[0] + self.width, self.bottom_left[1] + self.depth))
+        # print(f" maison {self.bottom_left} {self.top_right}")
 
     def get_price(self):
         pass
