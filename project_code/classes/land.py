@@ -8,12 +8,13 @@ from project_code.algorithms.randomise import randomise_coordinates
 
 class Land():
 
-    def __init__(self, source_file):
+    def __init__(self, source_file, number_houses):
         self.width = 180
         self.depth = 160
         self.water = self.load_water(source_file)
         self.houses = []
-        self.load_houses()
+        self.load_houses(number_houses)
+        
     
     def load_water(self, source_file):
         
@@ -34,24 +35,21 @@ class Land():
                 water = Water(left_bottom_tuple, top_right_tuple)
                 return water
 
-    def load_houses(self):
+    def load_houses(self, number_houses):
 
-        for i in range(12):
+        for i in range(int(0.6 * number_houses)):
             coordinates = randomise_coordinates()
             familyhome = Familyhome(coordinates)
-            # print(familyhome.bottom_left)
             self.houses.append(familyhome)
 
-        for i in range(5):
+        for i in range(int(0.25 * number_houses)):
             coordinates = randomise_coordinates()
             bungalow = Bungalow(coordinates)
-            # print(bungalow.bottom_left)
             self.houses.append(bungalow)
             
-        for i in range(3):
+        for i in range(int(0.15 * number_houses)):
             coordinates = randomise_coordinates()
             maison = Maison(coordinates)
-            # print(maison.bottom_left)
             self.houses.append(maison)
         
 
