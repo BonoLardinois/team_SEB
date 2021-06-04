@@ -60,7 +60,7 @@ class Land():
             overlap = True
             familyhome = None
             while(overlap):
-                coordinates = randomise_coordinates()
+                coordinates = randomise_coordinates(12, 12)
                 familyhome = Familyhome(coordinates)
                 overlap = self.overlap(familyhome) 
                 del familyhome              
@@ -73,7 +73,7 @@ class Land():
             overlap = True
             bungalow = None
             while (overlap):
-                coordinates = randomise_coordinates()
+                coordinates = randomise_coordinates(17, 13)
                 bungalow = Bungalow(coordinates)
                 overlap = self.overlap(bungalow)
                 del bungalow
@@ -85,7 +85,7 @@ class Land():
             overlap = True
             maison = None
             while (overlap):
-                coordinates = randomise_coordinates()
+                coordinates = randomise_coordinates(24, 22)
                 maison = Maison(coordinates)
                 overlap = self.overlap(maison)
                 del maison
