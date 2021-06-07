@@ -2,7 +2,7 @@ import csv
 from .water import Water
 from .house import House
 from project_code.algorithms.randomise import randomise_coordinates
-from shapely.geometry import Polygon
+from shapely.geometry import Polygon, MultiPolygon
 from shapely.ops import nearest_points
 
 
@@ -109,10 +109,14 @@ class Land():
         for house in houses:    
             if house.name != "water": 
                 origin = house.polygon
-                for polygon in all_polygons:
-                    geom1 = origin
-                    geom2 = polygon
-                    test1 = [o.wkt for o in nearest_points(geom1, geom2)]
-                    alle_tests.append(test1)
-        
+                polygons = MultiPolygon(all_polygons)
+                nearest_geoms = [o.wkt for o in nearest_points(origin, polygons)]
+                alle_tests.append(nearest_geoms)
         print(len(alle_tests))
+                #for polygon in all_polygons:
+                    #geom1 = origin
+                    #geom2 = polygon
+                    #test1 = [o.wkt for o in nearest_points(geom1, geom2)]
+                    #alle_tests.append(test1)
+        
+        #print(len(alle_tests))
