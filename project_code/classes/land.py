@@ -1,9 +1,9 @@
 import csv
-import random
 from .water import Water
 from .familyhome import Familyhome
 from .bungalow import Bungalow
 from .maison import Maison
+from .house import House
 from project_code.algorithms.randomise import randomise_coordinates
 from shapely.geometry import Polygon
 
@@ -61,37 +61,22 @@ class Land():
             familyhome = None
             while(overlap):
                 coordinates = randomise_coordinates(12, 12)
-                familyhome = Familyhome(coordinates)
-                overlap = self.overlap(familyhome) 
-                del familyhome              
-
-            
-            # self.houses.append(familyhome)
-            # self.all_coordinates.append(familyhome)
+                familyhome = House("familyhome", 12, 12, 285000, coordinates)
+                overlap = self.overlap(familyhome)             
 
         for i in range(int(0.25 * number_houses)):
             overlap = True
             bungalow = None
             while (overlap):
                 coordinates = randomise_coordinates(17, 13)
-                bungalow = Bungalow(coordinates)
+                bungalow = House("bungalow", 17, 13, 399000, coordinates)
                 overlap = self.overlap(bungalow)
-                del bungalow
-
-            # self.houses.append(bungalow)
-            # self.all_coordinates.append(bungalow)
             
         for i in range(int(0.15 * number_houses)):
             overlap = True
             maison = None
             while (overlap):
                 coordinates = randomise_coordinates(24, 22)
-                maison = Maison(coordinates)
+                maison = House("maison", 24, 22, 610000, coordinates)
                 overlap = self.overlap(maison)
-                del maison
-
-            # self.houses.append(maison)
-            # self.all_coordinates.append(maison)
-        
-
-
+     

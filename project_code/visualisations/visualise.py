@@ -33,5 +33,6 @@ def visualise(houses, waters):
     plt.title('Housing map')
     plt.xlabel('width')
     plt.ylabel('depth')
-    
+    plt.savefig('output/test.png')
     plt.show()
+   
