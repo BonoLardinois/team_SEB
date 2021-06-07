@@ -23,5 +23,11 @@ if __name__ == "__main__":
     housing_map = Land(f"data/{wijk_number}.csv", number_of_houses)
     visualise(housing_map.all_land_objects)
 
-    housing_map.calculate_price(housing_map.all_land_objects)
-   
+    housing_map.calculate_distance(housing_map.all_land_objects)
+ 
+    total_value = housing_map.calculate_price(housing_map.all_land_objects)
+
+    print(total_value)
+
+
+    

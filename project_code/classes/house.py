@@ -8,3 +8,4 @@ class House():
         self.bottom_left = coordinates
         self.top_right = tuple((self.bottom_left[0] + self.width, self.bottom_left[1] + self.depth))
         self.polygon = polygon
+        self.nearest_neighbour = None

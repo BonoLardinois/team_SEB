@@ -1,9 +1,11 @@
 import csv
+import math
 from .water import Water
 from .house import House
 from project_code.algorithms.randomise import randomise_coordinates
 from shapely.geometry import Polygon, MultiPolygon
 from shapely.ops import nearest_points
+
 
 
 class Land():
@@ -98,9 +100,8 @@ class Land():
                 maison = House("maison", 24, 22, 610000, coordinates, polygon)
                 overlap = self.overlap(maison)
      
-    def calculate_price(self, houses):
+    def calculate_distance(self, houses):
         all_polygons = []
-        alle_tests = []
 
         for house in houses:
             if house.name != "water":
@@ -109,14 +110,39 @@ class Land():
         for house in houses:    
             if house.name != "water": 
                 origin = house.polygon
+                all_polygons.remove(origin)
                 polygons = MultiPolygon(all_polygons)
-                nearest_geoms = [o.wkt for o in nearest_points(origin, polygons)]
-                alle_tests.append(nearest_geoms)
-        print(len(alle_tests))
-                #for polygon in all_polygons:
-                    #geom1 = origin
-                    #geom2 = polygon
-                    #test1 = [o.wkt for o in nearest_points(geom1, geom2)]
-                    #alle_tests.append(test1)
+                nearest_geom = nearest_points(origin, polygons)
+                x = math.floor(nearest_geom[0].distance(nearest_geom[1]))
+                extra_space = math.floor(x / 2)
+                house.nearest_neighbour = extra_space
+                all_polygons.append(origin)
+                print(x)
+                print(extra_space)
         
-        #print(len(alle_tests))
+
+    def calculate_price(self, houses):
+        total = 0
+
+        for house in houses:
+            if house.name == "familyhome":
+                house.price = 285000 + (285000 * 0.03 * house.nearest_neighbour)
+                total += house.price
+
+            elif house.name == "bungalow":
+                house.price = 399000 + (399000 * 0.04 * house.nearest_neighbour)
+                total += house.price
+
+            elif house.name == "maison":
+                house.price = 610000 + (610000 * 0.06 * house.nearest_neighbour)
+                total += house.price
+        
+        return total
+
+
+
+ 
+
+            
+
+           
