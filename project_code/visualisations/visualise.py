@@ -1,30 +1,34 @@
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 
-def visualise(houses, waters):
+def visualise(land_objects):
 
     # Create data
     fig, ax = plt.subplots()
     
-    for house in houses:
-        if house.name == "familyhome":
-            house_rect = patches.Rectangle((house.bottom_left[0], house.bottom_left[1]), 12, 12, linewidth=1, edgecolor='r', facecolor='none')
-            ax.add_patch(house_rect)
+    for land_object in land_objects:
+        if land_object.name == "familyhome":
+            rectangle = patches.Rectangle((land_object.bottom_left[0], land_object.bottom_left[1]), land_object.width, land_object.depth, linewidth=1, edgecolor='r', facecolor='none')
+            ax.add_patch(rectangle)   
             
-        elif house.name == "bungalow":
-            house_rect = patches.Rectangle((house.bottom_left[0], house.bottom_left[1]), 17, 13, linewidth=1, edgecolor='y', facecolor='none')
-            ax.add_patch(house_rect)
+        elif land_object.name == "bungalow":
+            rectangle = patches.Rectangle((land_object.bottom_left[0], land_object.bottom_left[1]), land_object.width, land_object.depth, linewidth=1, edgecolor='y', facecolor='none')
+            ax.add_patch(rectangle)   
+        
+        elif land_object.name == "maison":
+            rectangle = patches.Rectangle((land_object.bottom_left[0], land_object.bottom_left[1]), land_object.width, land_object.depth, linewidth=1, edgecolor='g', facecolor='none')
+            ax.add_patch(rectangle)    
         
         else:
-            house_rect = patches.Rectangle((house.bottom_left[0], house.bottom_left[1]), 24, 22, linewidth=1, edgecolor='g', facecolor='none')
-            ax.add_patch(house_rect)   
+            rectangle = patches.Rectangle((land_object.bottom_left[0], land_object.bottom_left[1]), land_object.width, land_object.depth, linewidth=1, edgecolor='b', facecolor='none')
+            ax.add_patch(rectangle)   
 
-    for water in waters:
-        top_right_x = water.top_right[0] - water.bottom_left[0]
-        top_right_y = water.top_right[1] - water.bottom_left[1]
+    # for water in waters:
+    #     top_right_x = water.top_right[0] - water.bottom_left[0]
+    #     top_right_y = water.top_right[1] - water.bottom_left[1]
         
-        water_rect = patches.Rectangle((water.bottom_left[0], water.bottom_left[1]), top_right_x, top_right_y, linewidth=1, edgecolor='b', facecolor='none')
-        ax.add_patch(water_rect) 
+    #     water_rect = patches.Rectangle((water.bottom_left[0], water.bottom_left[1]), top_right_x, top_right_y, linewidth=1, edgecolor='b', facecolor='none')
+    #     ax.add_patch(water_rect) 
 
     
 

@@ -21,4 +21,7 @@ if __name__ == "__main__":
 
     #create map
     housing_map = Land(f"data/{wijk_number}.csv", number_of_houses)
-    visualise(housing_map.houses, housing_map.waters)
+    visualise(housing_map.all_land_objects)
+
+    housing_map.calculate_price(housing_map.all_land_objects)
+   
