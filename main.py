@@ -28,6 +28,3 @@ if __name__ == "__main__":
     total_value = housing_map.calculate_price(housing_map.all_land_objects)
 
     print(total_value)
-
-
-    
