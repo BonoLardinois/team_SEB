@@ -13,6 +13,7 @@ class Land():
     def __init__(self, source_file, number_houses):
         self.width = 180
         self.depth = 160
+        self.all_polygons = []
         self.all_land_objects = []
         # self.available_coordinates = []
         self.total = 0
@@ -24,7 +25,7 @@ class Land():
         
         self.water = self.load_water(source_file)
         self.load_houses(number_houses, )
-         
+        
     # def remove_used_point(self, land_object):
         
         # for x in range(land_object.bottom_left[0], land_object.top_right[0]+1):
@@ -45,14 +46,27 @@ class Land():
             if land_object.polygon.intersects(new_house) == True:
                 # del house
                 return True
+        
+            if land_object.name != 'water':
+                origin = house.polygon
+                polygons = MultiPolygon(self.all_polygons)
+                nearest_geom = nearest_points(origin, polygons)
+                x = math.floor(nearest_geom[0].distance(nearest_geom[1]))
+                extra_space = math.floor(x)
+                if extra_space < land_object.free_space:
+                    #print(f"extra space: {extra_space}")
+                    #print (f'fout {land_object.name}')
+                    return True
+                
 
         # if no overlap append polygon to list
         self.all_land_objects.append(house)
+        self.all_polygons.append(house.polygon)
 
-        #self.remove_used_point(house)  
-        print(house)
-        # exit the while loop
         return False
+    
+    def check_free_space(self):
+        pass
 
 
     def load_water(self, source_file):
@@ -74,9 +88,8 @@ class Land():
 
                 water = Water(bottom_left_tuple, top_right_tuple, polygon)
 
-                # self.remove_used_point(water)
-
                 self.all_land_objects.append(water)
+                self.all_polygons.append(water.polygon)
          
         return self.all_land_objects
 
@@ -86,36 +99,36 @@ class Land():
         '''
 
         for i in range(int(0.15 * number_houses)):
-            width = 24
-            depth = 22
+            width = 12
+            depth = 10
             overlap = True
             maison = None
             while (overlap):
                 coordinates = randomise_coordinates(width, depth)
                 polygon = Polygon([coordinates, (coordinates[0] + width, coordinates[1]), (coordinates[0] + width, coordinates[1] + depth), (coordinates[0], coordinates[1] + depth)])
-                maison = House("maison", width, depth, 610000, coordinates, polygon)
+                maison = House("maison", width, depth, 610000, coordinates, polygon, 6)
                 overlap = self.overlap(maison)         
 
         for i in range(int(0.25 * number_houses)):
-            width = 17
-            depth = 13
+            width = 11
+            depth = 7
             overlap = True
             bungalow = None
             while (overlap):
                 coordinates = randomise_coordinates(width, depth)
                 polygon = Polygon([coordinates, (coordinates[0] + width, coordinates[1]), (coordinates[0] + width, coordinates[1] + depth), (coordinates[0], coordinates[1] + depth)])
-                bungalow = House("bungalow", width, depth, 399000, coordinates, polygon)
+                bungalow = House("bungalow", width, depth, 399000, coordinates, polygon, 3)
                 overlap = self.overlap(bungalow)
 
         for i in range(int(0.6 * number_houses)):
-            width = 12
-            depth = 12
+            width = 8
+            depth = 8
             overlap = True
             familyhome = None
             while(overlap):
                 coordinates = randomise_coordinates(width, depth)
                 polygon = Polygon([coordinates, (coordinates[0] + width, coordinates[1]), (coordinates[0] + width, coordinates[1] + depth), (coordinates[0], coordinates[1] + depth)])
-                familyhome = House("familyhome", width, depth, 285000, coordinates, polygon)
+                familyhome = House("familyhome", width, depth, 285000, coordinates, polygon, 2)
                 overlap = self.overlap(familyhome)
             
      
@@ -136,7 +149,7 @@ class Land():
                 polygons = MultiPolygon(all_polygons)
                 nearest_geom = nearest_points(origin, polygons)
                 x = math.floor(nearest_geom[0].distance(nearest_geom[1]))
-                extra_space = math.floor(x / 2) # /2 weghalen
+                extra_space = math.floor(x) # /2 weghalen
                 house.nearest_neighbour = extra_space
                 all_polygons.append(origin)        
 
