@@ -1,6 +1,8 @@
 from project_code.classes.land import Land
 from project_code.visualisations.visualise import visualise
 from sys import argv
+# from project_code.algorithms.render_randomise import render_randomise
+import cProfile
 
 if __name__ == "__main__":
 
@@ -20,11 +22,27 @@ if __name__ == "__main__":
         exit(1)
 
     #create map
+
+    
+    # radom function
+    # def render_randomise(iterations):
+    #     highest_scoring_map = None
+    #     highest_score = 0
+    #     for n in range(iterations):
+    #         housing_map = Land(f"data/{wijk_number}.csv", number_of_houses)
+    #         housing_map.calculate_distance(housing_map.all_land_objects)
+    #         total_value = housing_map.calculate_price(housing_map.all_land_objects)
+    #         if total_value > highest_score:
+    #             highest_scoring_map = housing_map
+    #             highest_score = total_value
+    #     print(highest_score)
+
+    # winner = render_randomise(1)
+    
+
     housing_map = Land(f"data/{wijk_number}.csv", number_of_houses)
-    visualise(housing_map.all_land_objects)
-
     housing_map.calculate_distance(housing_map.all_land_objects)
- 
     total_value = housing_map.calculate_price(housing_map.all_land_objects)
-
+    visualise(housing_map.all_land_objects, total_value)
     print(total_value)
+    

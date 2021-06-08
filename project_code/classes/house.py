@@ -9,3 +9,6 @@ class House():
         self.top_right = tuple((self.bottom_left[0] + self.width, self.bottom_left[1] + self.depth))
         self.polygon = polygon
         self.nearest_neighbour = None
+
+    def __str__(self):
+        return (f"name:{self.name}, left_bottom: {self.bottom_left}, top_right: {self.top_right}")
