@@ -3,6 +3,7 @@ from project_code.classes.house import House
 from shapely.geometry import Polygon
 import random
 from project_code.algorithms.randomise import randomise_coordinates
+from copy import deepcopy
 
 
 class Randomise():
@@ -94,6 +95,7 @@ class Randomise():
         highest_scoring_map = None
         highest_score = 0
         for n in range(iterations):
+            copy_map = deepcopy(housing_map)
             # for house in range(number_houses):
             #     random_house = choose_random_house()
             # random huis die we gaan plaatsen
@@ -102,7 +104,7 @@ class Randomise():
             # 2e iteratie moet weer zelfde doen maar dan waarde vergelijken met 1e iteratie
             # meest waarde volle kaart onthouden
             
-            resulting_map = self.load_houses(number_houses, housing_map)
+            resulting_map = self.load_houses(number_houses, copy_map)
             
             resulting_map.calculate_distance(resulting_map.all_land_objects)
             total_value = resulting_map.calculate_price(resulting_map.all_land_objects)

@@ -24,12 +24,10 @@ if __name__ == "__main__":
     
     # --------------------------- Random  --------------------------
     empty_graph = Land(f"data/{wijk_number}.csv")
-    winner_graph = Randomise(empty_graph, number_of_houses, 10)
+    winner_graph = Randomise(empty_graph, number_of_houses, 20)
     visualise(winner_graph.winner.all_land_objects, winner_graph.winner.total)
 
 
-    print(f"Value of the configuration after render_rendomise: "
-          f"{random_graph.calculate_value()}")
 
     # ---------------------------------------------------------------
 
