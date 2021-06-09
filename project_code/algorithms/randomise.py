@@ -1,6 +1,7 @@
 import random
 # from ..classes.land import Land
 
+
 def randomise_coordinates(width, depth):
     #width1 = width
     #depth1 = depth

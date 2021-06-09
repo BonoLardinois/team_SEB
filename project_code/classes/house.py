@@ -1,6 +1,6 @@
 class House():
 
-    def __init__(self, type_house, width, depth, price, coordinates, polygon, free_space):
+    def __init__(self, type_house, width, depth, price, coordinates, polygon, free_space, polygon_free_space):
         self.name = type_house
         self.width = width
         self.depth = depth
@@ -10,6 +10,9 @@ class House():
         self.polygon = polygon
         self.nearest_neighbour = None
         self.free_space = free_space
+        self.width_with_freespace = self.width + (self.free_space * 2)
+        self.depth_with_freespace = self.depth + (self.free_space * 2)
+        self.polygon_free_space = polygon_free_space
 
     def __str__(self):
         return (f"name:{self.name}, left_bottom: {self.bottom_left}, top_right: {self.top_right}")
