@@ -1,7 +1,7 @@
 from project_code.classes.land import Land
 from project_code.visualisations.visualise import visualise
 from sys import argv
-# from project_code.algorithms.render_randomise import render_randomise
+from project_code.algorithms.render_randomise import Randomise
 import cProfile
 
 if __name__ == "__main__":
@@ -20,29 +20,23 @@ if __name__ == "__main__":
     if number_of_houses not in [20, 40, 60] or wijk_number not in ["wijk_1", "wijk_2", "wijk_3"]:
         print("Usage: python3 main.py [type of wijk: wijk_1, wijk_2 or wijk_3] [number of houses: 20, 40 or 60]")
         exit(1)
-
-    #create map
-
     
-    # radom function
-    # def render_randomise(iterations):
-    #     highest_scoring_map = None
-    #     highest_score = 0
-    #     for n in range(iterations):
-    #         housing_map = Land(f"data/{wijk_number}.csv", number_of_houses)
-    #         housing_map.calculate_distance(housing_map.all_land_objects)
-    #         total_value = housing_map.calculate_price(housing_map.all_land_objects)
-    #         if total_value > highest_score:
-    #             highest_scoring_map = housing_map
-    #             highest_score = total_value
-    #     print(highest_score)
-
-    # winner = render_randomise(1)
     
+    # --------------------------- Random  --------------------------
+    empty_graph = Land(f"data/{wijk_number}.csv")
+    winner_graph = Randomise(empty_graph, number_of_houses, 10)
+    visualise(winner_graph.winner.all_land_objects, winner_graph.winner.total)
 
-    housing_map = Land(f"data/{wijk_number}.csv", number_of_houses)
+
+    print(f"Value of the configuration after render_rendomise: "
+          f"{random_graph.calculate_value()}")
+
+    # ---------------------------------------------------------------
+
+    """ housing_map = Land(f"data/{wijk_number}.csv", number_of_houses)
     housing_map.calculate_distance(housing_map.all_land_objects)
     total_value = housing_map.calculate_price(housing_map.all_land_objects)
     visualise(housing_map.all_land_objects, total_value)
-    print(total_value)
-    
+    print(total_value) """
+
+
