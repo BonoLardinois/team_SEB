@@ -123,61 +123,7 @@ class Randomise():
                 highest_score = total_value
         
         return highest_scoring_map
-    
-    # def load_houses(self, type_house):
-    #     if type_house == 'familyhome':
-    #         width = 8
-    #         depth = 8
-    #         width2 = 12
-    #         depth2 = 12
-    #         required_free_space = 2
-    #         overlap = True
-    #         familyhome = None
-    #         while(overlap):
-    #             coordinates = randomise_coordinates(width2, depth2)
-    #             polygon = Polygon([(coordinates[0] + required_free_space, coordinates[1] + required_free_space), (coordinates[0] + width + required_free_space, coordinates[1] + required_free_space), (coordinates[0] + width + required_free_space, coordinates[1] + depth + required_free_space), (coordinates[0] + required_free_space, coordinates[1] + depth + required_free_space)])
-
-    #             # polygon with required free space, created to calculate price of house
-    #             polygon_free_space = Polygon([coordinates, (coordinates[0] + width2, coordinates[1]), (coordinates[0] + width2, coordinates[1] + depth2), (coordinates[0], coordinates[1] + depth2)])
-    #             coordinates2 = tuple((coordinates[0] + required_free_space, coordinates[1] + required_free_space))
-    #             familyhome = House("familyhome", width, depth, 285000, coordinates2, polygon, 2, polygon_free_space)
-    #             overlap = housing_map.overlap(familyhome)
-                
-    #     elif type_house == 'bungalow':
-    #         width = 11
-    #         depth = 7
-    #         width2 = 17
-    #         depth2 = 19
-    #         required_free_space = 3
-    #         overlap = True
-    #         bungalow = None
-    #         while (overlap):
-    #             coordinates = randomise_coordinates(width2, depth2)
-    #             polygon = Polygon([(coordinates[0] + required_free_space, coordinates[1] + required_free_space), (coordinates[0] + width + required_free_space, coordinates[1] + required_free_space), (coordinates[0] + width + required_free_space, coordinates[1] + depth + required_free_space), (coordinates[0] + required_free_space, coordinates[1] + depth + required_free_space)])
-
-    #             # polygon with required free space, created to calculate price of house
-    #             polygon_free_space = Polygon([coordinates, (coordinates[0] + width2, coordinates[1]), (coordinates[0] + width2, coordinates[1] + depth2), (coordinates[0], coordinates[1] + depth2)])
-    #             coordinates2 = tuple((coordinates[0] + required_free_space, coordinates[1] + required_free_space))
-    #             bungalow = House("bungalow", width, depth, 399000, coordinates2, polygon, 3, polygon_free_space)
-    #             overlap = housing_map.overlap(bungalow)
-
-    #     elif type_house == 'maison':
-    #         width = 12
-    #         depth = 10
-    #         width2 = 24
-    #         depth2 = 22
-    #         required_free_space = 6
-    #         overlap = True
-    #         maison = None
-    #         while (overlap):
-    #             coordinates = randomise_coordinates(width2, depth2)
-    #             polygon = Polygon([(coordinates[0] + required_free_space, coordinates[1] + required_free_space), (coordinates[0] + width + required_free_space, coordinates[1] + required_free_space), (coordinates[0] + width + required_free_space, coordinates[1] + depth + required_free_space), (coordinates[0] + required_free_space, coordinates[1] + depth + required_free_space)])
-                
-    #             # polygon with required free space, created to calculate price of house
-    #             polygon_free_space = Polygon([coordinates, (coordinates[0] + width2, coordinates[1]), (coordinates[0] + width2, coordinates[1] + depth2), (coordinates[0], coordinates[1] + depth2)])
-    #             coordinates2 = tuple((coordinates[0] + required_free_space, coordinates[1] + required_free_space))
-    #             maison = House("maison", width, depth, 610000, coordinates2, polygon, 6, polygon_free_space)
-    #             overlap = housing_map.overlap(maison)
+   
 
 
             
