@@ -38,5 +38,5 @@ def visualise(land_objects, total):
     plt.xlabel('width')
     plt.ylabel('depth')
     plt.savefig('output/test.png')
-    #plt.show()
+    # plt.show()
    
