@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 
-def visualise(land_objects, total):
+def visualise(land_objects, total,out_path="output/test.png"):
 
     # Create data
     fig, ax = plt.subplots()
@@ -37,6 +37,6 @@ def visualise(land_objects, total):
     plt.title(f'Housing map, total: {total}')
     plt.xlabel('width')
     plt.ylabel('depth')
-    plt.savefig('output/test.png')
+    plt.savefig(out_path)
     #plt.show()
    

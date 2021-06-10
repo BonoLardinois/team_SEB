@@ -1,10 +1,13 @@
+from copy import deepcopy
 import csv
 import math
 from .water import Water
 from .house import House
 from shapely.geometry import Polygon, MultiPolygon, mapping
 from shapely.ops import nearest_points
+from random import choice
 
+DIRECTIONS = ["UP","RIGHT","DOWN","LEFT"]
 
 
 class Land():
@@ -17,6 +20,58 @@ class Land():
         self.water = self.load_water(source_file)
         #self.load_houses(number_houses)
         
+
+        
+
+
+
+    def do_random_move(self):
+        # create local variables to use in both loops
+        i = -1
+        house = None
+        # guess a land object that isn't water by index
+        while True:
+            i = choice(range(len(self.all_land_objects)))
+            if self.all_land_objects[i].name == 'water':
+                continue
+            house = deepcopy(self.all_land_objects[i])
+            break
+        for x in range(100):
+            
+            direction = choice(DIRECTIONS)
+            # move houses by 1 coordinate
+            if direction == "UP":
+                house.move(0,1)
+            elif direction == "RIGHT":
+                house.move(1,0)
+            elif direction == "DOWN":
+                house.move(0,-1)
+            else:
+                house.move(-1,0)
+            if not self.real_overlap(house):
+                # if there is no overlap we add the house
+                self.all_land_objects[i] = house
+                return self
+
+    
+
+    def real_overlap(self,house):
+        '''
+        function to check for overlap
+        '''
+        
+        # checks all land objects if overlap return true
+        for land_object in self.all_land_objects:
+            if land_object.name != 'water':
+                if house.polygon_free_space.intersects(land_object.polygon) == True or land_object.polygon_free_space.intersects(house.polygon_free_space) == True:
+                    return True        
+            elif land_object.name == 'water':
+                if land_object.polygon.intersects(house.polygon) == True:
+                    return True
+
+        # if no overlap append polygon to list
+        return False
+
     def overlap(self, house):
         '''
         function to check for overlap
@@ -71,7 +126,7 @@ class Land():
        
         for house in houses:    
             if house.name != "water": 
-                origin = house.polygon #_free_space
+                origin = house.polygon
                 all_polygons.remove(house.polygon)
                 polygons = MultiPolygon(all_polygons)
                 nearest_geom = nearest_points(origin, polygons)
@@ -83,7 +138,7 @@ class Land():
         '''
         Calculate price of house and total price of land
         '''
-
+        self.total = 0
         for house in houses:
             if house.name == "familyhome":
                 house.price = 285000 + (285000 * 0.03 * house.nearest_neighbour)
