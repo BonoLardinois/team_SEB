@@ -94,21 +94,32 @@ class Genetic():
     #     print(self.choices)
         
     def run(self, housing_map, number_houses, iterations):
-        highest_scoring_map = None
+        # initial generation
         generation= [] 
+
+        # create a number of random maps
         for n in range(iterations):
             copy_map = deepcopy(housing_map)
             
+            # place houses on those maps
             resulting_map = self.load_houses(number_houses, copy_map)
             
+            # calculate value of map
             resulting_map.calculate_distance(resulting_map.all_land_objects)
             value = resulting_map.calculate_price(resulting_map.all_land_objects)
-            # sort by value
+
+            # add map to list
             generation.append((resulting_map,value))
+
+        # sort generation by value of map
         generation = sorted(generation,key=lambda z : z[1],reverse=True)
         print(generation[0][1])
+
+        # for a number of generations, create new generation
         for z in range(GENERATIONS):
             new_generation = []
+
+            # make mutations to create new maps and keep old maps
             for g in range(len(generation)):
                 for x in range(NR_MOVES):
                     new_map = deepcopy(generation[g][0])
@@ -118,9 +129,12 @@ class Genetic():
                     new_generation.append((new_map,p))
                 new_generation.append(generation[g])
             
+            # sort this new generation by value and keep top X
             new_generation = sorted(new_generation,key=lambda z : z [1], reverse=True)
             generation = new_generation[:TOP_X]
+            # print value of the best map from this new generation
             print(new_generation[0][1])
+        # return the housing map with the best value
         return generation[0][0]
    
 
