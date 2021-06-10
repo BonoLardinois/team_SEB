@@ -71,8 +71,7 @@ class Land():
        
         for house in houses:    
             if house.name != "water": 
-                origin = house.polygon_free_space
-                # eigen polygon even uit huisverwijderen 
+                origin = house.polygon #_free_space
                 all_polygons.remove(house.polygon)
                 polygons = MultiPolygon(all_polygons)
                 nearest_geom = nearest_points(origin, polygons)
