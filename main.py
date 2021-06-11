@@ -33,9 +33,9 @@ if __name__ == "__main__":
 
     # --------------------------- Hill Climber  --------------------------
     empty_graph = Land(f"data/{wijk_number}.csv")
-    starting_graph = Randomise(empty_graph, number_of_houses, 1)
+    starting_graph = Randomise(empty_graph, number_of_houses, 100)
     winner_graph = HillClimber(starting_graph.winner)
-    # visualise(winner_graph.winner.all_land_objects, winner_graph.winner.total)
+    visualise(winner_graph.winner.all_land_objects, winner_graph.winner.total)
 
     # ---------------------------------------------------------------------
 
