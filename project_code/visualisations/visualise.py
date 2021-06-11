@@ -19,7 +19,7 @@ def visualise(land_objects, total):
             rectangle = patches.Rectangle((land_object.bottom_left[0], land_object.bottom_left[1]), land_object.width, land_object.depth, linewidth=1, edgecolor='g', facecolor='none')
             ax.add_patch(rectangle)    
         
-        else:
+        elif land_object.name == "water":
             rectangle = patches.Rectangle((land_object.bottom_left[0], land_object.bottom_left[1]), land_object.width, land_object.depth, linewidth=1, edgecolor='b', facecolor='none')
             ax.add_patch(rectangle)   
 
@@ -38,5 +38,5 @@ def visualise(land_objects, total):
     plt.xlabel('width')
     plt.ylabel('depth')
     plt.savefig('output/test.png')
-    # plt.show()
+    plt.show()
    
