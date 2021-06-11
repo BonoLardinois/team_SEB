@@ -32,4 +32,7 @@ class House():
         # update the polygons
         self.polygon = Polygon([(self.bottom_left[0], self.bottom_left[1]), (self.bottom_left[0] + self.width, self.bottom_left[1]), (self.bottom_left[0] + self.width, self.bottom_left[1] + self.depth), (self.bottom_left[0], self.bottom_left[1] + self.depth)])
         self.polygon_free_space = Polygon([(self.bottom_left[0] - self.free_space, self.bottom_left[1] - self.free_space), (self.bottom_left[0] + self.width_with_freespace - self.free_space, self.bottom_left[1] - self.free_space), (self.bottom_left[0] + self.width_with_freespace - self.free_space, self.bottom_left[1] + self.depth_with_freespace - self.free_space), (self.bottom_left[0] - self.free_space, self.bottom_left[1] + self.depth_with_freespace - self.free_space)])
-        
+    
+        land_polygon = Polygon([(0, 0), (0, 180), (180, 160), (0, 160)])
+        if land_polygon.intersects(self.polygon_free_space) ==  False:
+            return True

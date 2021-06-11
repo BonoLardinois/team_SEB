@@ -17,17 +17,17 @@ class HillClimber():
         generations.append("copy_map")
         current_best_value = copy_map.total
         counter = 0
-        for i in range(20):
+        for i in range(50):
             for house in copy_map.all_land_objects:
                 copy_map.total = 0
                 if house.name != "water":
                     # print("for loop values:")
 
                     # moves house to the right
-                    house.move(1, 0)
-                    copy_map.calculate_distance(copy_map.all_land_objects)
-                    total_value_right = copy_map.calculate_price(copy_map.all_land_objects)
-                    # copy_map_right = deepcopy(copy_map)
+                    if house.move(1, 0):
+                        copy_map.calculate_distance(copy_map.all_land_objects)
+                        total_value_right = copy_map.calculate_price(copy_map.all_land_objects)
+                        # copy_map_right = deepcopy(copy_map)
                     house.move(-1, 0)
                     copy_map.total = 0
 
@@ -38,11 +38,11 @@ class HillClimber():
                         current_best_value = total_value_right
 
                     # moves house to the left
-                    house.move(-1, 0)
-                    copy_map.calculate_distance(copy_map.all_land_objects)
-                    total_value_left = copy_map.calculate_price(copy_map.all_land_objects)
-                    # copy_map_left = deepcopy(copy_map)
-                    house.move(-1, 0)
+                    if house.move(-1, 0):
+                        copy_map.calculate_distance(copy_map.all_land_objects)
+                        total_value_left = copy_map.calculate_price(copy_map.all_land_objects)
+                        # copy_map_left = deepcopy(copy_map)
+                    house.move(1, 0)
                     copy_map.total = 0
 
                     if total_value_left > current_best_value:
@@ -52,10 +52,10 @@ class HillClimber():
                         current_best_value = total_value_left            
 
                     # moves house up
-                    house.move(0, 1)
-                    copy_map.calculate_distance(copy_map.all_land_objects)
-                    total_value_up = copy_map.calculate_price(copy_map.all_land_objects)
-                    # copy_map_up = deepcopy(copy_map)
+                    if house.move(0, 1):
+                        copy_map.calculate_distance(copy_map.all_land_objects)
+                        total_value_up = copy_map.calculate_price(copy_map.all_land_objects)
+                        # copy_map_up = deepcopy(copy_map)
                     house.move(0, -1)
                     copy_map.total = 0
 
@@ -66,10 +66,10 @@ class HillClimber():
                         current_best_value = total_value_up
 
                     # moves house down
-                    house.move(0, -1)
-                    copy_map.calculate_distance(copy_map.all_land_objects)
-                    total_value_down = copy_map.calculate_price(copy_map.all_land_objects)
-                    # copy_map_down = deepcopy(copy_map)
+                    if house.move(0, -1):
+                        copy_map.calculate_distance(copy_map.all_land_objects)
+                        total_value_down = copy_map.calculate_price(copy_map.all_land_objects)
+                        # copy_map_down = deepcopy(copy_map)
                     house.move(0, 1)
                     copy_map.total = 0
 
@@ -81,23 +81,23 @@ class HillClimber():
                     
                     if generations[0] == "right":
                         house.move(1, 0)
-                        copy_map = deepcopy(copy_map)
+                        # copy_map = deepcopy(copy_map)
 
                     elif generations[0] == "left":
                         house.move(-1, 0)
-                        copy_map = deepcopy(copy_map)
+                        # copy_map = deepcopy(copy_map)
 
                     elif generations[0] == "up":
                         house.move(0, 1)
-                        copy_map = deepcopy(copy_map)
+                        # copy_map = deepcopy(copy_map)
 
                     elif generations[0] == "down":
                         house.move(0, -1)
-                        copy_map = deepcopy(copy_map)
+                        # copy_map = deepcopy(copy_map)
                     
                     else:
                         house.move(0, 0)
-                        copy_map = deepcopy(copy_map)
+                        # copy_map = deepcopy(copy_map)
 
                     # copy_map = deepcopy(generations[0])   
                     # print("one for loop done")
