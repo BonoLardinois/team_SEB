@@ -25,7 +25,11 @@ class House():
         self.bottom_left = tuple((self.bottom_left[0] + change_x, self.bottom_left[1] + change_y))
         self.top_right = tuple((self.top_right[0] + change_x, self.top_right[1] + change_y))
 
+        # # update the polygons
+        # self.polygon = Polygon([(self.bottom_left[0] + self.free_space, self.bottom_left[1] + self.free_space), (self.bottom_left[0] + self.width + self.free_space, self.bottom_left[1] + self.free_space), (self.bottom_left[0] + self.width + self.free_space, self.bottom_left[1] + self.depth + self.free_space), (self.bottom_left[0] + self.free_space, self.bottom_left[1] + self.depth + self.free_space)])
+        # self.polygon_free_space = Polygon([self.bottom_left, (self.bottom_left[0] + self.width_with_freespace, self.bottom_left[1]), (self.bottom_left[0] + self.width_with_freespace, self.bottom_left[1] + self.depth_with_freespace), (self.bottom_left[0], self.bottom_left[1] + self.depth_with_freespace)])
+        
         # update the polygons
-        self.polygon = Polygon([(self.bottom_left[0] + self.free_space, self.bottom_left[1] + self.free_space), (self.bottom_left[0] + self.width + self.free_space, self.bottom_left[1] + self.free_space), (self.bottom_left[0] + self.width + self.free_space, self.bottom_left[1] + self.depth + self.free_space), (self.bottom_left[0] + self.free_space, self.bottom_left[1] + self.depth + self.free_space)])
-        self.polygon_free_space = Polygon([self.bottom_left, (self.bottom_left[0] + self.width_with_freespace, self.bottom_left[1]), (self.bottom_left[0] + self.width_with_freespace, self.bottom_left[1] + self.depth_with_freespace), (self.bottom_left[0], self.bottom_left[1] + self.depth_with_freespace)])
+        self.polygon = Polygon([(self.bottom_left[0], self.bottom_left[1]), (self.bottom_left[0] + self.width, self.bottom_left[1]), (self.bottom_left[0] + self.width, self.bottom_left[1] + self.depth), (self.bottom_left[0], self.bottom_left[1] + self.depth)])
+        self.polygon_free_space = Polygon([(self.bottom_left[0] - self.free_space, self.bottom_left[1] - self.free_space), (self.bottom_left[0] + self.width_with_freespace - self.free_space, self.bottom_left[1] - self.free_space), (self.bottom_left[0] + self.width_with_freespace - self.free_space, self.bottom_left[1] + self.depth_with_freespace - self.free_space), (self.bottom_left[0] - self.free_space, self.bottom_left[1] + self.depth_with_freespace - self.free_space)])
         
