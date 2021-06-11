@@ -24,22 +24,21 @@ if __name__ == "__main__":
     
     
     # --------------------------- Random  --------------------------
+    # empty_graph = Land(f"data/{wijk_number}.csv")
+    # winner_graph = Randomise(empty_graph, number_of_houses, 20)
+
+    # visualise(winner_graph.winner.all_land_objects, winner_graph.winner.total)
+
+
+    # --------------------------- Genetic ---------------------------
     empty_graph = Land(f"data/{wijk_number}.csv")
     winner_graph = Genetic(empty_graph, number_of_houses, 20)
 
     visualise(winner_graph.winner.all_land_objects, winner_graph.winner.total)
+    
 
-
-
-
-    # ---------------------------------------------------------------
-
-    """ housing_map = Land(f"data/{wijk_number}.csv", number_of_houses)
-    housing_map.calculate_distance(housing_map.all_land_objects)
-    total_value = housing_map.calculate_price(housing_map.all_land_objects)
-    visualise(housing_map.all_land_objects, total_value)
-    print(total_value) """
-
+    # DON'T DELETE -- WRITTEN FOR CHECK50
+    #
     # with open("output.csv", "w", newline="") as file:
     #     writer = csv.writer(file)
     #     writer.writerow(["structure","corner_1","corner_2","corner_3","corner_4","type"])
