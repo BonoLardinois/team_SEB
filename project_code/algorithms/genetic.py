@@ -125,8 +125,8 @@ class Genetic():
                     new_map = deepcopy(generation[g][0])
                     new_map.do_random_move()
                     new_map.calculate_distance(new_map.all_land_objects)
-                    p = new_map.calculate_price(new_map.all_land_objects)
-                    new_generation.append((new_map,p))
+                    value = new_map.calculate_price(new_map.all_land_objects)
+                    new_generation.append((new_map, value))
                 new_generation.append(generation[g])
             
             # sort this new generation by value and keep top X

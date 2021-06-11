@@ -23,9 +23,9 @@ class Land():
 
     def do_random_move(self):
         # create local variables to use in both loops
-        i = -1
+        i = 0
         house = None
-        # guess a land object that isn't water by index
+        # get a land object that isn't water by index
         while True:
             i = choice(range(len(self.all_land_objects)))
             if self.all_land_objects[i].name == 'water':
@@ -33,7 +33,7 @@ class Land():
             house = deepcopy(self.all_land_objects[i])
             break
         for x in range(100):
-            
+            # get random direction
             direction = choice(DIRECTIONS)
             # move houses by 1 coordinate
             if direction == "UP":
@@ -45,7 +45,7 @@ class Land():
             else:
                 house.move(-1,0)
             if not self.real_overlap(house):
-                # if there is no overlap we add the house
+                # if there is no overlap we add the random house
                 self.all_land_objects[i] = house
                 break
         return self
