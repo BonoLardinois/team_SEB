@@ -24,8 +24,9 @@ if __name__ == "__main__":
     
     
     # --------------------------- Random  --------------------------
-    # empty_graph = Land(f"data/{wijk_number}.csv")
-    # winner_graph = Randomise(empty_graph, number_of_houses, 20)
+    empty_graph = Land(f"data/{wijk_number}.csv")
+    winner_graph = Randomise(empty_graph, number_of_houses, 1)
+    visualise(winner_graph.winner.all_land_objects, winner_graph.winner.total)
 
     # visualise(winner_graph.winner.all_land_objects, winner_graph.winner.total)
 

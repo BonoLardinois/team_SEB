@@ -4,7 +4,6 @@ from shapely.geometry import Polygon
 import random
 from project_code.algorithms.randomise import randomise_coordinates
 from copy import deepcopy
-import random
 from project_code.algorithms.rotation import rotation
 
 
@@ -31,7 +30,7 @@ class Randomise():
         numb_bungalows = int(0.25 * number_houses)
         numb_familyhouses = int(0.6 * number_houses)
         houses_to_place = {
-            'maison': [12,10,24,22,6,numb_maisons, 610000],
+            'maison': [12,10,24,22,6,int(0.15 * number_houses), 610000],
             'bungalow': [11,7,17,19,3,numb_bungalows, 399000],
             'familyhome': [8,8,12,12,2,numb_familyhouses, 285000]
             }
@@ -72,33 +71,19 @@ class Randomise():
 
                     # check if overlap
                     overlap = housing_map.overlap(house) 
-
-                    
                     counter += 1
 
         return (housing_map)
-
-    # def choose_random_house()
-    #     type_house = random.choice(list(self.choices.keys()))
-    #     self.choices[type_house] = self.choices[type_house] - 1
-    #     if self.choices[type_house] == 0:
-    #         self.choices.pop(type_house)
-    #     load_houses(type_house)
-    #     print(self.choices)
         
     def run(self, housing_map, number_houses, iterations):
+        '''
+        function for generating maps with randomly placed houses and picking the highest value map
+        '''
+
         highest_scoring_map = None
         highest_score = 0
         for n in range(iterations):
             copy_map = deepcopy(housing_map)
-            # for house in range(number_houses):
-            #     random_house = choose_random_house()
-            # random huis die we gaan plaatsen
-            # load_house aanroepen om het huis te plaatsen
-            # wanneer alle huizen geplaatst zijn dan die map opslaan 
-            # 2e iteratie moet weer zelfde doen maar dan waarde vergelijken met 1e iteratie
-            # meest waarde volle kaart onthouden
-            
             resulting_map = self.load_houses(number_houses, copy_map)
             
             resulting_map.calculate_distance(resulting_map.all_land_objects)
@@ -107,8 +92,6 @@ class Randomise():
             if total_value > highest_score:
                 highest_scoring_map = resulting_map
                 highest_score = total_value
-
-            print(total_value)
         
         return highest_scoring_map
    

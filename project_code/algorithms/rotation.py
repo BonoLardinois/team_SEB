@@ -9,7 +9,7 @@ def rotation(coordinates, width, depth, placement, required_free_space):
 
         width = depth
         depth = copy_width
-        width_with_required_free_space = depth + (2*required_free_space)
+        width_with_required_free_space = depth + (2 * required_free_space)
         depth_with_required_free_space = copy_width_required_free_space
         
 

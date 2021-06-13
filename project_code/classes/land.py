@@ -147,6 +147,7 @@ class Land():
                 house.price = 610000 + (610000 * 0.06 * house.nearest_neighbour)
                 self.total += house.price
         
+        print(len(self.all_land_objects))
         return self.total
 
 
