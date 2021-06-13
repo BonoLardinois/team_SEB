@@ -1,8 +1,7 @@
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
-import matplotlib.backends.backend_pdf
 
-def visualise(land_objects, total,out_path="output/test.pdf"):
+def visualise(land_objects, total,out_path="output/test.png"):
 
     # Create data
     fig, ax = plt.subplots()
@@ -29,10 +28,6 @@ def visualise(land_objects, total,out_path="output/test.pdf"):
     plt.title(f'Housing map, total: {total}')
     plt.xlabel('width')
     plt.ylabel('depth')
-    plt.show()
-    pdf = matplotlib.backends.backend_pdf.PdfPages(out_path)
-    for fig in range(1, plt.gcf().number + 1):
-        pdf.savefig(fig)
-    pdf.close()
+    plt.savefig(out_path)
     
    

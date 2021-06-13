@@ -1,5 +1,6 @@
 from project_code.classes.land import Land
 from project_code.classes.house import House
+from project_code.visualisations.visualise import visualise
 from shapely.geometry import Polygon
 from project_code.algorithms.randomise import randomise_coordinates
 from copy import deepcopy
@@ -119,6 +120,8 @@ class Genetic():
             # sort this new generation by value and keep top X
             new_generation = sorted(new_generation,key=lambda z : z [1], reverse=True)
             generation = new_generation[:TOP_X]
+            for i in range(5):
+                visualise(generation[i][0].all_land_objects,generation[0][1],f'output/intermediate_generation{z}_{i}.png')
             # print value of the best map from this new generation
             print(new_generation[0][1])
         # return the housing map with the best value

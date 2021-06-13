@@ -44,27 +44,28 @@ class Land():
                 house.move(0,-1)
             else:
                 house.move(-1,0)
-            if not self.real_overlap(house):
+            if self.check_valid(house):
                 # if there is no overlap we add the random house
                 self.all_land_objects[i] = house
                 break
         return self
 
-    def real_overlap(self,house):
+    def check_valid(self,house):
         '''
         function to check for overlap (doesn't append land_objects)
         '''
         # for the genetic algorithm, we don't want to append as we'll get endless copies of houses we've moved
-
+        if not house.check_bounds(self.width,self.depth):
+            return False
         # checks all land objects if overlap return true
         for land_object in self.all_land_objects:
             if land_object.name != 'water':
                 if house.polygon_free_space.intersects(land_object.polygon) == True or land_object.polygon_free_space.intersects(house.polygon_free_space) == True:
-                    return True        
+                    return False     
             elif land_object.name == 'water':
                 if land_object.polygon.intersects(house.polygon) == True:
-                    return True
-        return False
+                    return False
+        return True
 
     def overlap(self, house):
         '''
