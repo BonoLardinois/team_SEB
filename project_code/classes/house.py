@@ -36,13 +36,13 @@ class House():
         self.polygon_free_space = Polygon([(self.bottom_left[0] - self.free_space, self.bottom_left[1] - self.free_space), (self.bottom_left[0] + self.width_with_freespace - self.free_space, self.bottom_left[1] - self.free_space), (self.bottom_left[0] + self.width_with_freespace - self.free_space, self.bottom_left[1] + self.depth_with_freespace - self.free_space), (self.bottom_left[0] - self.free_space, self.bottom_left[1] + self.depth_with_freespace - self.free_space)])
         
     def check_bounds(self,width,depth):
-        if self.bottom_left[0] < 0 or self.bottom_left[0] > width:
+        if self.bottom_left[0] - self.free_space < 0 or self.bottom_left[0] + self.free_space > width:
             return False
-        if self.bottom_left[1] < 0 or self.bottom_left[1] > depth:
+        if self.bottom_left[1] - self.free_space < 0 or self.bottom_left[1] + self.free_space > depth:
             return False
-        if self.top_right[0] < 0 or self.top_right[0] > width: 
+        if self.top_right[0] - self.free_space < 0 or self.top_right[0] + self.free_space > width: 
             return False
-        if self.top_right[1] < 0 or self.top_right[1] > depth:
+        if self.top_right[1] - self.free_space < 0 or self.top_right[1] + self.free_space > depth:
             return False
         return True
 
