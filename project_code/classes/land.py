@@ -14,7 +14,8 @@ class Land():
         self.depth = 160
         self.all_land_objects = []
         self.total = 0
-        self.water = self.load_water(source_file)
+        self.water = []
+        self.load_water(source_file)
         #self.load_houses(number_houses)
         
     def overlap(self, house):
@@ -52,13 +53,12 @@ class Land():
                 top_right_tuple = tuple((int(top_right.split(',')[0]), int(top_right.split(',')[1])))
                 
                 polygon = Polygon([bottom_left_tuple, (top_right_tuple[0], bottom_left_tuple[1]), top_right_tuple, (bottom_left_tuple[0], top_right_tuple[1])])
-
+                
                 water = Water(bottom_left_tuple, top_right_tuple, polygon)
 
                 self.all_land_objects.append(water)
+                self.water.append(water)
          
-        return self.all_land_objects
-       
     def calculate_distance(self, houses):
         '''
         Calculate distance to closest house

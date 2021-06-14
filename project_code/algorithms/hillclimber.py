@@ -13,22 +13,24 @@ class HillClimber():
 
         # checks if house intersects with water
         for water in waters:
-            if house.polygon.intersects(water.polygon):
-                # print("test intersects water")   
+            if water.polygon.intersects(house.polygon):
                 return False
-            else:
-                return True
 
-        # print("test in valid")
-        # checks if house is outside the borders of the land
-        if house.bottom_left[0] < house.free_space or house.bottom_left[0] > 180 - house.width_with_freespace or house.bottom_left[1] < house.free_space or house.bottom_left[1] > 160 - house.depth_with_freespace or house.top_right[0] < house.width_with_freespace or house.top_right[0] > 180 - house.free_space or house.top_right[1] < house.depth_with_freespace or house.top_right[1] > 160 - house.free_space:
-            # print("test crosses border")            
-            return False
-        else: 
-            return True
-        
-        # print("test no overlap")
+        # if house.bottom_left[0] - house.free_space < 0 or house.bottom_left[0] + house.free_space > 180:
+        #     return False
+        # if house.bottom_left[1] - house.free_space < 0 or house.bottom_left[1] + house.free_space > 160:
+        #     return False
+        # if house.top_right[0] - house.free_space < 0 or house.top_right[0] + house.free_space > 180: 
+        #     return False
+        # if house.top_right[1] - house.free_space < 0 or house.top_right[1] + house.free_space > 160:
+        #     return False
         # return True
+
+
+        if house.bottom_left[0] < house.free_space or house.bottom_left[0] > 180 - house.width_with_freespace or house.bottom_left[1] < house.free_space or house.bottom_left[1] > 160 - house.depth_with_freespace or house.top_right[0] < house.width_with_freespace or house.top_right[0] > 180 - house.free_space or house.top_right[1] < house.depth_with_freespace or house.top_right[1] > 160 - house.free_space:
+            return False
+    
+        return True
 
     def run(self, housing_map):
         print("housing map value:")
@@ -38,7 +40,15 @@ class HillClimber():
         generations.append("copy_map")
         current_best_value = copy_map.total
         counter = 0
-        for i in range(200):
+        iterations = 40
+
+        for i in range(iterations):
+
+            if counter < (iterations / 2):
+                steps = 2
+            if counter >= (iterations / 2):
+                steps = 1
+
             for house in copy_map.all_land_objects:
                 copy_map.total = 0
                 if house.name != "water":
@@ -46,14 +56,14 @@ class HillClimber():
 
                     # moves house to the right
                     total_value_right = 0
-                    house.move(1, 0)
+                    house.move(steps, 0)
 
                     # checks for overlap
                     if self.valid_move(house, housing_map.water):
                         copy_map.calculate_distance(copy_map.all_land_objects)
                         total_value_right = copy_map.calculate_price(copy_map.all_land_objects)
                         # copy_map_right = deepcopy(copy_map)
-                    house.move(-1, 0)
+                    house.move(-steps, 0)
                     copy_map.total = 0
 
                     if total_value_right > current_best_value:
@@ -64,14 +74,14 @@ class HillClimber():
 
                     # moves house to the left
                     total_value_left = 0
-                    house.move(-1, 0)
+                    house.move(-steps, 0)
 
                     # checks for overlap
                     if self.valid_move(house, housing_map.water):
                         copy_map.calculate_distance(copy_map.all_land_objects)
                         total_value_left = copy_map.calculate_price(copy_map.all_land_objects)
                         # copy_map_left = deepcopy(copy_map)
-                    house.move(1, 0)
+                    house.move(steps, 0)
                     copy_map.total = 0
 
                     if total_value_left > current_best_value:
@@ -82,14 +92,14 @@ class HillClimber():
 
                     # moves house up
                     total_value_up = 0
-                    house.move(0, 1)
+                    house.move(0, steps)
                     
                     # checks for overlap
                     if self.valid_move(house, housing_map.water):
                         copy_map.calculate_distance(copy_map.all_land_objects)
                         total_value_up = copy_map.calculate_price(copy_map.all_land_objects)
                         # copy_map_up = deepcopy(copy_map)
-                    house.move(0, -1)
+                    house.move(0, -steps)
                     copy_map.total = 0
 
                     if total_value_up > current_best_value:
@@ -100,14 +110,14 @@ class HillClimber():
 
                     # moves house down
                     total_value_down = 0
-                    house.move(0, -1)
+                    house.move(0, -steps)
                     
                     # checks for overlap
                     if self.valid_move(house, housing_map.water):
                         copy_map.calculate_distance(copy_map.all_land_objects)
                         total_value_down = copy_map.calculate_price(copy_map.all_land_objects)
                         # copy_map_down = deepcopy(copy_map)
-                    house.move(0, 1)
+                    house.move(0, steps)
                     copy_map.total = 0
 
                     if total_value_down > current_best_value:
@@ -117,19 +127,19 @@ class HillClimber():
                         current_best_value = total_value_down
                     
                     if generations[0] == "right":
-                        house.move(1, 0)
+                        house.move(steps, 0)
                         # copy_map = deepcopy(copy_map)
 
                     elif generations[0] == "left":
-                        house.move(-1, 0)
+                        house.move(-steps, 0)
                         # copy_map = deepcopy(copy_map)
 
                     elif generations[0] == "up":
-                        house.move(0, 1)
+                        house.move(0, steps)
                         # copy_map = deepcopy(copy_map)
 
                     elif generations[0] == "down":
-                        house.move(0, -1)
+                        house.move(0, -steps)
                         # copy_map = deepcopy(copy_map)
                     
                     generations = ["copy_map"]
