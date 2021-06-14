@@ -40,13 +40,18 @@ class HillClimber():
         generations.append("copy_map")
         current_best_value = copy_map.total
         counter = 0
-        iterations = 40
+        # steps = 8
+        iterations = 100
 
         for i in range(iterations):
 
-            if counter < (iterations / 2):
+            if i < 10:
+                steps = 8 
+            if i >= 10 and i < 15:
+                steps = 4
+            if i >= 15 and i < 20:
                 steps = 2
-            if counter >= (iterations / 2):
+            if i >= 20:
                 steps = 1
 
             for house in copy_map.all_land_objects:
