@@ -9,6 +9,27 @@ class HillClimber():
     def __init__(self, housing_map):
         self.winner = self.run(housing_map)
 
+    def valid_move(self, house, waters):
+
+        # checks if house intersects with water
+        for water in waters:
+            if house.polygon.intersects(water.polygon):
+                # print("test intersects water")   
+                return False
+            else:
+                return True
+
+        # print("test in valid")
+        # checks if house is outside the borders of the land
+        if house.bottom_left[0] < house.free_space or house.bottom_left[0] > 180 - house.width_with_freespace or house.bottom_left[1] < house.free_space or house.bottom_left[1] > 160 - house.depth_with_freespace or house.top_right[0] < house.width_with_freespace or house.top_right[0] > 180 - house.free_space or house.top_right[1] < house.depth_with_freespace or house.top_right[1] > 160 - house.free_space:
+            # print("test crosses border")            
+            return False
+        else: 
+            return True
+        
+        # print("test no overlap")
+        # return True
+
     def run(self, housing_map):
         print("housing map value:")
         print(housing_map.total)
@@ -17,7 +38,7 @@ class HillClimber():
         generations.append("copy_map")
         current_best_value = copy_map.total
         counter = 0
-        for i in range(400):
+        for i in range(200):
             for house in copy_map.all_land_objects:
                 copy_map.total = 0
                 if house.name != "water":
@@ -132,18 +153,6 @@ class HillClimber():
         return copy_map
         # visualise(copy_map.all_land_objects, copy_map.total)
 
-def valid_move(self, house, housing_map):
-
-    # checks if house is outside the borders of the land
-    if house.bottom_left[0] < house.free_space or house.bottom_left[0] > 180 - house.width_with_freespace or house.bottom_left[1] < house.free_space or house.bottom_left[1] > 160 - house.depth_with_freespace or house.top_right[0] < house.width_with_freespace or house.top_right[0] > 180 - house.free_space or house.top_right[1] < house.depth_with_freespace or house.top_right[1] > 160 - house.free_space:
-        return False
-
-    # checks if house intersects with water
-    for water in housing_map.water:
-        if house.polygon.intersects(water.polygon):
-            return False
-
-    return True
     
 
     
