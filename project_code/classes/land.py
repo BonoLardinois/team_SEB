@@ -8,6 +8,7 @@ from shapely.ops import nearest_points
 from random import choice
 
 DIRECTIONS = ["UP","RIGHT","DOWN","LEFT"]
+STEPS = 10
 
 
 class Land():
@@ -18,55 +19,7 @@ class Land():
         self.all_land_objects = []
         self.total = 0
         self.water = self.load_water(source_file)
-        #self.load_houses(number_houses)
         
-
-    def do_random_move(self):
-        # create local variables to use in both loops
-        i = 0
-        house = None
-        # get a land object that isn't water by index
-        while True:
-            i = choice(range(len(self.all_land_objects)))
-            if self.all_land_objects[i].name == 'water':
-                continue
-            house = deepcopy(self.all_land_objects[i])
-            break
-        for x in range(100):
-            # get random direction
-            direction = choice(DIRECTIONS)
-            # move houses by 1 coordinate
-            if direction == "UP":
-                house.move(0,1)
-            elif direction == "RIGHT":
-                house.move(1,0)
-            elif direction == "DOWN":
-                house.move(0,-1)
-            else:
-                house.move(-1,0)
-            if self.check_valid(house):
-                # if there is no overlap we add the random house
-                self.all_land_objects[i] = house
-                break
-        return self
-
-    def check_valid(self,house):
-        '''
-        function to check for overlap (doesn't append land_objects)
-        '''
-        # for the genetic algorithm, we don't want to append as we'll get endless copies of houses we've moved
-        if not house.check_bounds(self.width,self.depth):
-            return False
-        # checks all land objects if overlap return true
-        for land_object in self.all_land_objects:
-            if land_object.name != 'water':
-                if house.polygon_free_space.intersects(land_object.polygon) == True or land_object.polygon_free_space.intersects(house.polygon_free_space) == True:
-                    return False     
-            elif land_object.name == 'water':
-                if land_object.polygon.intersects(house.polygon) == True:
-                    return False
-        return True
-
     def overlap(self, house):
         '''
         function to check for overlap

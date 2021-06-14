@@ -6,10 +6,59 @@ from project_code.algorithms.randomise import randomise_coordinates
 from copy import deepcopy
 import random
 from project_code.algorithms.rotation import rotation
+from random import choice
 
+DIRECTIONS = ["UP","RIGHT","DOWN","LEFT"]
+STEPS = 10
 NR_MOVES = 5
-GENERATIONS = 10
-TOP_X = 20
+GENERATIONS = 300
+TOP_X = 50
+
+def do_random_move(land):
+    # create local variables to use in both loops
+    i = 0
+    house = None
+    # get a land object that isn't water by index
+    while True:
+        i = choice(range(len(land.all_land_objects)))
+        if land.all_land_objects[i].name == 'water':
+            continue
+        house = deepcopy(land.all_land_objects[i])
+        break
+    for x in range(100):
+        # get random direction
+        direction = choice(DIRECTIONS)
+        # move houses by 1 coordinate
+        if direction == "UP":
+            house.move(0,STEPS)
+        elif direction == "RIGHT":
+            house.move(STEPS,0)
+        elif direction == "DOWN":
+            house.move(0,-STEPS)
+        else:
+            house.move(-STEPS,0)
+        if check_valid(land, house):
+            # if there is no overlap we add the random house
+            land.all_land_objects[i] = house
+            break
+    return land
+
+def check_valid(land, house):
+    '''
+    function to check for overlap (doesn't append land_objects)
+    '''
+    # for the genetic algorithm, we don't want to append as we'll get endless copies of houses we've moved
+    if not house.check_bounds(land.width, land.depth):
+        return False
+    # checks all land objects if overlap return true
+    for land_object in land.all_land_objects:
+        if land_object.name != 'water':
+            if house.polygon_free_space.intersects(land_object.polygon) == True or land_object.polygon_free_space.intersects(house.polygon_free_space) == True:
+                return False     
+        elif land_object.name == 'water':
+            if land_object.polygon.intersects(house.polygon) == True:
+                return False
+    return True
 
 class Genetic():
 
@@ -79,7 +128,8 @@ class Genetic():
 
         return (housing_map)
 
-        
+
+
     def run(self, housing_map, number_houses, iterations):
         # initial generation
         generation= [] 
@@ -110,7 +160,7 @@ class Genetic():
             for g in range(len(generation)):
                 for x in range(NR_MOVES):
                     new_map = deepcopy(generation[g][0]) 
-                    new_map.do_random_move()
+                    new_map = do_random_move(new_map)
                     new_map.calculate_distance(new_map.all_land_objects)
                     value = new_map.calculate_price(new_map.all_land_objects)
                     new_generation.append((new_map, value))
@@ -120,8 +170,10 @@ class Genetic():
             # sort this new generation by value and keep top X
             new_generation = sorted(new_generation,key=lambda z : z [1], reverse=True)
             generation = new_generation[:TOP_X]
-            for i in range(5):
-                visualise(generation[i][0].all_land_objects,generation[0][1],f'output/intermediate_generation{z}_{i}.png')
+
+            # for i in range(5): -- {z}__{i}
+            # visualise(generation[z][0].all_land_objects,generation[0][1],f'output/intermediate_generation{z}.png')
+
             # print value of the best map from this new generation
             print(new_generation[0][1])
         # return the housing map with the best value
