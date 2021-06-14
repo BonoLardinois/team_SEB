@@ -3,6 +3,7 @@ from project_code.classes.house import House
 from copy import deepcopy
 from shapely.geometry import Polygon
 from project_code.visualisations.visualise import visualise
+import matplotlib.pyplot as plt
 
 class HillClimber():
 
@@ -41,8 +42,12 @@ class HillClimber():
         current_best_value = copy_map.total
         counter = 0
         # steps = 8
-        iterations = 100
+        iterations = 5
 
+        # data for iteration graph
+        iteration_counter = 0
+        results = []
+        total_iterations = []
         for i in range(iterations):
 
             if i < 10:
@@ -156,6 +161,12 @@ class HillClimber():
                     # print("one for loop done")
                     # copy_map = deepcopy(copy_map)
             counter += 1
+
+            # data for iteration graph
+            iteration_counter += 1
+            total_iterations.append(iteration_counter)
+            results.append(current_best_value)
+
             print(counter)
 
         # calculates value for return object
@@ -164,6 +175,15 @@ class HillClimber():
 
         print(f"copy map: {copy_map.total}")
         print(f"copy map: {generations[0]}")
+        
+        print(total_iterations)
+        print(results)
+        
+        plt.plot(total_iterations, results)
+        plt.xlabel('x - axis')
+        plt.ylabel('y - axis') 
+        plt.title('Iteration graph')
+        plt.savefig('output/iteration_graph.png')
 
         return copy_map
         # visualise(copy_map.all_land_objects, copy_map.total)
