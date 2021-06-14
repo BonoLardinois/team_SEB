@@ -3,6 +3,7 @@ from project_code.visualisations.visualise import visualise
 from sys import argv
 from project_code.algorithms.render_randomise import Randomise
 from project_code.algorithms.genetic import Genetic
+from project_code.algorithms.hillclimberswap import Hillclimber
 import cProfile
 import csv
 
@@ -26,18 +27,22 @@ if __name__ == "__main__":
     
     # --------------------------- Random  --------------------------
     # empty_graph = Land(f"data/{wijk_number}.csv")
-    # winner_graph = Randomise(empty_graph, number_of_houses, 1)
-    # visualise(winner_graph.winner.all_land_objects, winner_graph.winner.total)
-
-    # visualise(winner_graph.winner.all_land_objects, winner_graph.winner.total)
+    # winner_graph = Randomise(empty_graph, number_of_houses, 400)
+    # visualise(winner_graph.winner.all_land_objects, winner_graph.winner.total, len(winner_graph.winner.all_land_objects))
 
 
     # --------------------------- Genetic ---------------------------
-    empty_graph = Land(f"data/{wijk_number}.csv")
-    winner_graph = Genetic(empty_graph, number_of_houses, 20)
+    # empty_graph = Land(f"data/{wijk_number}.csv")
+    # winner_graph = Genetic(empty_graph, number_of_houses, 20)
 
-    visualise(winner_graph.winner.all_land_objects, winner_graph.winner.total)
+    # visualise(winner_graph.winner.all_land_objects, winner_graph.winner.total)
     
+
+    # --------------------------- Hillclimber swap ---------------------------
+    empty_graph = Land(f"data/{wijk_number}.csv")
+    winner = Hillclimber(empty_graph, number_of_houses, 1000)
+    visualise(winner.winner.all_land_objects, winner.winner.total, len(winner.winner.all_land_objects))
+
 
     # DON'T DELETE -- WRITTEN FOR CHECK50
     #
