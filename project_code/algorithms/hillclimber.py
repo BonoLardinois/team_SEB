@@ -25,7 +25,10 @@ class HillClimber():
 
                     # moves house to the right
                     total_value_right = 0
-                    if house.move(1, 0):
+                    house.move(1, 0)
+
+                    # checks for overlap
+                    if self.valid_move(house, housing_map.water):
                         copy_map.calculate_distance(copy_map.all_land_objects)
                         total_value_right = copy_map.calculate_price(copy_map.all_land_objects)
                         # copy_map_right = deepcopy(copy_map)
@@ -40,7 +43,10 @@ class HillClimber():
 
                     # moves house to the left
                     total_value_left = 0
-                    if house.move(-1, 0):
+                    house.move(-1, 0)
+
+                    # checks for overlap
+                    if self.valid_move(house, housing_map.water):
                         copy_map.calculate_distance(copy_map.all_land_objects)
                         total_value_left = copy_map.calculate_price(copy_map.all_land_objects)
                         # copy_map_left = deepcopy(copy_map)
@@ -55,7 +61,10 @@ class HillClimber():
 
                     # moves house up
                     total_value_up = 0
-                    if house.move(0, 1):
+                    house.move(0, 1)
+                    
+                    # checks for overlap
+                    if self.valid_move(house, housing_map.water):
                         copy_map.calculate_distance(copy_map.all_land_objects)
                         total_value_up = copy_map.calculate_price(copy_map.all_land_objects)
                         # copy_map_up = deepcopy(copy_map)
@@ -70,7 +79,10 @@ class HillClimber():
 
                     # moves house down
                     total_value_down = 0
-                    if house.move(0, -1):
+                    house.move(0, -1)
+                    
+                    # checks for overlap
+                    if self.valid_move(house, housing_map.water):
                         copy_map.calculate_distance(copy_map.all_land_objects)
                         total_value_down = copy_map.calculate_price(copy_map.all_land_objects)
                         # copy_map_down = deepcopy(copy_map)
@@ -120,5 +132,18 @@ class HillClimber():
         return copy_map
         # visualise(copy_map.all_land_objects, copy_map.total)
 
+def valid_move(self, house, housing_map):
+
+    # checks if house is outside the borders of the land
+    if house.bottom_left[0] < house.free_space or house.bottom_left[0] > 180 - house.width_with_freespace or house.bottom_left[1] < house.free_space or house.bottom_left[1] > 160 - house.depth_with_freespace or house.top_right[0] < house.width_with_freespace or house.top_right[0] > 180 - house.free_space or house.top_right[1] < house.depth_with_freespace or house.top_right[1] > 160 - house.free_space:
+        return False
+
+    # checks if house intersects with water
+    for water in housing_map.water:
+        if house.polygon.intersects(water.polygon):
+            return False
+
+    return True
+    
 
     

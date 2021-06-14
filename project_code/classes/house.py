@@ -33,8 +33,8 @@ class House():
         self.polygon = Polygon([(self.bottom_left[0], self.bottom_left[1]), (self.bottom_left[0] + self.width, self.bottom_left[1]), (self.bottom_left[0] + self.width, self.bottom_left[1] + self.depth), (self.bottom_left[0], self.bottom_left[1] + self.depth)])
         self.polygon_free_space = Polygon([(self.bottom_left[0] - self.free_space, self.bottom_left[1] - self.free_space), (self.bottom_left[0] + self.width_with_freespace - self.free_space, self.bottom_left[1] - self.free_space), (self.bottom_left[0] + self.width_with_freespace - self.free_space, self.bottom_left[1] + self.depth_with_freespace - self.free_space), (self.bottom_left[0] - self.free_space, self.bottom_left[1] + self.depth_with_freespace - self.free_space)])
 
-        # checks if house is outside the borders of the land
-        if self.bottom_left[0] < self.free_space or self.bottom_left[0] > 180 - self.width_with_freespace or self.bottom_left[1] < self.free_space or self.bottom_left[1] > 160 - self.depth_with_freespace or self.top_right[0] < self.width_with_freespace or self.top_right[0] > 180 - self.free_space or self.top_right[1] < self.depth_with_freespace or self.top_right[1] > 160 - self.free_space:
-            return False
-        else:
-            return True
+        # # checks if house is outside the borders of the land
+        # if self.bottom_left[0] < self.free_space or self.bottom_left[0] > 180 - self.width_with_freespace or self.bottom_left[1] < self.free_space or self.bottom_left[1] > 160 - self.depth_with_freespace or self.top_right[0] < self.width_with_freespace or self.top_right[0] > 180 - self.free_space or self.top_right[1] < self.depth_with_freespace or self.top_right[1] > 160 - self.free_space:
+        #     return False
+        # else:
+        #     return True
