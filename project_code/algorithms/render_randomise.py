@@ -30,7 +30,7 @@ class Randomise():
         numb_bungalows = int(0.25 * number_houses)
         numb_familyhouses = int(0.6 * number_houses)
         houses_to_place = {
-            'maison': [12,10,24,22,6,int(0.15 * number_houses), 610000],
+            'maison': [12,10,24,22,6,numb_maisons, 610000],
             'bungalow': [11,7,17,19,3,numb_bungalows, 399000],
             'familyhome': [8,8,12,12,2,numb_familyhouses, 285000]
             }

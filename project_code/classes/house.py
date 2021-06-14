@@ -35,7 +35,7 @@ class House():
         self.polygon = Polygon([(self.bottom_left[0], self.bottom_left[1]), (self.bottom_left[0] + self.width, self.bottom_left[1]), (self.bottom_left[0] + self.width, self.bottom_left[1] + self.depth), (self.bottom_left[0], self.bottom_left[1] + self.depth)])
         self.polygon_free_space = Polygon([(self.bottom_left[0] - self.free_space, self.bottom_left[1] - self.free_space), (self.bottom_left[0] + self.width_with_freespace - self.free_space, self.bottom_left[1] - self.free_space), (self.bottom_left[0] + self.width_with_freespace - self.free_space, self.bottom_left[1] + self.depth_with_freespace - self.free_space), (self.bottom_left[0] - self.free_space, self.bottom_left[1] + self.depth_with_freespace - self.free_space)])
         
-    def check_bounds(self,width,depth):
+    def check_bounds(self, width, depth):
         if self.bottom_left[0] - self.free_space < 0 or self.bottom_left[0] + self.free_space > width:
             return False
         if self.bottom_left[1] - self.free_space < 0 or self.bottom_left[1] + self.free_space > depth:
