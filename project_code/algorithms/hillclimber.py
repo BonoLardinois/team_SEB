@@ -17,13 +17,14 @@ class HillClimber():
         generations.append("copy_map")
         current_best_value = copy_map.total
         counter = 0
-        for i in range(50):
+        for i in range(400):
             for house in copy_map.all_land_objects:
                 copy_map.total = 0
                 if house.name != "water":
                     # print("for loop values:")
 
                     # moves house to the right
+                    total_value_right = 0
                     if house.move(1, 0):
                         copy_map.calculate_distance(copy_map.all_land_objects)
                         total_value_right = copy_map.calculate_price(copy_map.all_land_objects)
@@ -38,6 +39,7 @@ class HillClimber():
                         current_best_value = total_value_right
 
                     # moves house to the left
+                    total_value_left = 0
                     if house.move(-1, 0):
                         copy_map.calculate_distance(copy_map.all_land_objects)
                         total_value_left = copy_map.calculate_price(copy_map.all_land_objects)
@@ -52,6 +54,7 @@ class HillClimber():
                         current_best_value = total_value_left            
 
                     # moves house up
+                    total_value_up = 0
                     if house.move(0, 1):
                         copy_map.calculate_distance(copy_map.all_land_objects)
                         total_value_up = copy_map.calculate_price(copy_map.all_land_objects)
@@ -66,6 +69,7 @@ class HillClimber():
                         current_best_value = total_value_up
 
                     # moves house down
+                    total_value_down = 0
                     if house.move(0, -1):
                         copy_map.calculate_distance(copy_map.all_land_objects)
                         total_value_down = copy_map.calculate_price(copy_map.all_land_objects)
@@ -95,13 +99,14 @@ class HillClimber():
                         house.move(0, -1)
                         # copy_map = deepcopy(copy_map)
                     
-                    else:
-                        house.move(0, 0)
+                    generations = ["copy_map"]
+                    # else:
+                    #     house.move(0, 0)
                         # copy_map = deepcopy(copy_map)
 
                     # copy_map = deepcopy(generations[0])   
                     # print("one for loop done")
-
+                    # copy_map = deepcopy(copy_map)
             counter += 1
             print(counter)
 

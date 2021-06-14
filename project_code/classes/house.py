@@ -32,7 +32,9 @@ class House():
         # update the polygons
         self.polygon = Polygon([(self.bottom_left[0], self.bottom_left[1]), (self.bottom_left[0] + self.width, self.bottom_left[1]), (self.bottom_left[0] + self.width, self.bottom_left[1] + self.depth), (self.bottom_left[0], self.bottom_left[1] + self.depth)])
         self.polygon_free_space = Polygon([(self.bottom_left[0] - self.free_space, self.bottom_left[1] - self.free_space), (self.bottom_left[0] + self.width_with_freespace - self.free_space, self.bottom_left[1] - self.free_space), (self.bottom_left[0] + self.width_with_freespace - self.free_space, self.bottom_left[1] + self.depth_with_freespace - self.free_space), (self.bottom_left[0] - self.free_space, self.bottom_left[1] + self.depth_with_freespace - self.free_space)])
-    
-        land_polygon = Polygon([(0, 0), (0, 180), (180, 160), (0, 160)])
-        if land_polygon.intersects(self.polygon_free_space) ==  False:
+
+        # checks if house is outside the borders of the land
+        if self.bottom_left[0] < self.free_space or self.bottom_left[0] > 180 - self.width_with_freespace or self.bottom_left[1] < self.free_space or self.bottom_left[1] > 160 - self.depth_with_freespace or self.top_right[0] < self.width_with_freespace or self.top_right[0] > 180 - self.free_space or self.top_right[1] < self.depth_with_freespace or self.top_right[1] > 160 - self.free_space:
+            return False
+        else:
             return True
