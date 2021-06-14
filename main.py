@@ -48,10 +48,11 @@ if __name__ == "__main__":
     visualise(winner_graph.winner.all_land_objects, winner_graph.winner.total, f"Number of houses: {counter}")
     
 
-    # --------------------------- Hillclimber swap ---------------------------
-    empty_graph = Land(f"data/{wijk_number}.csv")
-    winner = Hillclimber(empty_graph, number_of_houses, 1000)
-    visualise(winner.winner.all_land_objects, winner.winner.total, len(winner.winner.all_land_objects))
+    # # --------------------------- Hill Climber  --------------------------
+    # empty_graph = Land(f"data/{wijk_number}.csv")
+    # starting_graph = Randomise(empty_graph, number_of_houses, 12)
+    # winner_graph = HillClimber(starting_graph.winner)
+    # visualise(winner_graph.winner.all_land_objects, winner_graph.winner.total)
 
 
     # DON'T DELETE -- WRITTEN FOR CHECK50

@@ -6,12 +6,13 @@ from project_code.algorithms.randomise import randomise_coordinates
 from copy import deepcopy
 import random
 from project_code.algorithms.rotation import rotation
+import matplotlib.pyplot as plt
 from random import choice
 
 DIRECTIONS = ["UP","RIGHT","DOWN","LEFT"]
 STEPS = 10
 NR_MOVES = 5
-GENERATIONS = 300
+GENERATIONS = 4
 TOP_X = 50
 
 def do_random_move(land):
@@ -133,6 +134,7 @@ class Genetic():
     def run(self, housing_map, number_houses, iterations):
         # initial generation
         generation= [] 
+        
 
         # create a number of random maps
         for n in range(iterations):
@@ -151,6 +153,14 @@ class Genetic():
         # sort generation by value of map
         generation = sorted(generation,key=lambda z : z[1],reverse=True)
         # print(generation[0][1])
+
+
+
+        results = []
+        total_generations = []
+
+        generation_counter = 0
+
 
         # for a number of generations, create new generation
         for z in range(GENERATIONS):
@@ -176,6 +186,24 @@ class Genetic():
 
             # print value of the best map from this new generation
             print(new_generation[0][1])
+
+            # keep track of iterations
+            generation_counter += 1
+            total_generations.append(generation_counter)
+
+
+            results.append(new_generation[0][1])
+
+        print(total_generations)
+        print(results)
+        
+        # visualise iterations graph
+        plt.plot(total_generations, results)
+        plt.xlabel('x axis')
+        plt.ylabel('y axis') 
+        plt.title('Graph')
+        plt.savefig('output/genetic_graph.png')
+
         # return the housing map with the best value
         return generation[0][0]
    
