@@ -34,9 +34,15 @@ if __name__ == "__main__":
 
     # --------------------------- Genetic ---------------------------
     empty_graph = Land(f"data/{wijk_number}.csv")
-    winner_graph = Genetic(empty_graph, number_of_houses, 20)
+    winner_graph = Genetic(empty_graph, number_of_houses, 200)
 
-    visualise(winner_graph.winner.all_land_objects, winner_graph.winner.total)
+    counter = 0
+    for land_object in winner_graph.winner.all_land_objects:
+        if land_object.name != 'water':
+            counter += 1
+
+
+    visualise(winner_graph.winner.all_land_objects, winner_graph.winner.total, f"Number of houses: {counter}")
     
 
     # DON'T DELETE -- WRITTEN FOR CHECK50
