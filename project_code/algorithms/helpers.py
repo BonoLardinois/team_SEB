@@ -68,7 +68,7 @@ def rotate(start_map):
     placement = old_house.placement
     if placement == 'vertical':
         rotation_finished = rotation(old_house.bottom_left, old_house.width, old_house.depth, 'horizontal', old_house.free_space)
-    if placement == 'horizontal':
+    else:
         rotation_finished = rotation(old_house.bottom_left, old_house.width, old_house.depth, 'vertical', old_house.free_space)
 
     new_house = House(old_house.name, rotation_finished[0], rotation_finished[1], old_house.price, old_house.bottom_left, rotation_finished[2], old_house.free_space, rotation_finished[3])

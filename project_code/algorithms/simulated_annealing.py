@@ -6,7 +6,7 @@ from .helpers import swap_with_random_rotation, rotate
 class Simulated_annealing():
 
     def __init__(self, empty_graph, number_houses):
-        self.start_map = Randomise(empty_graph, number_houses, 1).winner
+        self.start_map = Randomise(empty_graph, number_houses, 400).winner
         self.calc_price(self.start_map)
         self.simulated_annealing(self.start_map)
         self.end_result = None
@@ -19,9 +19,9 @@ class Simulated_annealing():
     
     def simulated_annealing(self, start_map):
         # temp bepalen aan de hand van plotje. niet nooit verslechteren. 
-        temp = 10000
-        alpha = 0.01
-        final_temp = 0.01
+        temp = 10100
+        alpha = 0.1
+        final_temp = 10000
 
         current_temp = temp
 
@@ -52,14 +52,18 @@ class Simulated_annealing():
             if difference > 0:
                 current_state = new_map
                 # als dit gebeurt moet ook de current temp - alpha
-                current_temp = current_temp = alpha
+                current_temp = current_temp - alpha
                 
             # als de nieuwe kaart niet beter is dan moet deze alsnog worden geaccepteerd maar met een probabillity??
             if difference < 0:
-                probability = math.exp(-(difference)/current_temp)
-                if random.uniform(0,1) > probability:
+                probability = math.exp((-(difference))/current_temp)
+                random_number = random.uniform(0,1)
+                if random_number > probability:
                     current_state = new_map
-                    current_temp = current_temp = alpha
+                    current_temp = current_temp - alpha
+                current_temp = current_temp - alpha    
+            # print(current_temp)
+            # print(current_state.total)
 
         print(current_state.total)
         self.end_result = current_state

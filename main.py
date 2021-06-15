@@ -32,9 +32,9 @@ if __name__ == "__main__":
     # visualise(winner_graph.winner.all_land_objects, winner_graph.winner.total, len(winner_graph.winner.all_land_objects))
 
     # # --------------------------- Hillclimber swap ---------------------------
-    # empty_graph = Land(f"data/{wijk_number}.csv")
-    # winner = Hillclimber(empty_graph, number_of_houses, 1000, 400)
-    # visualise(winner.winner.all_land_objects, winner.winner.total, len(winner.winner.all_land_objects))
+    empty_graph = Land(f"data/{wijk_number}.csv")
+    winner = Hillclimber(empty_graph, number_of_houses, 100, 4)
+    visualise(winner.winner.all_land_objects, winner.winner.total, len(winner.winner.all_land_objects))
 
 
     # --------------------------- Genetic ---------------------------
@@ -56,8 +56,8 @@ if __name__ == "__main__":
     # visualise(winner_graph.winner.all_land_objects, winner_graph.winner.total)
 
     # # --------------------------- Simulated annealing  --------------------------
-    empty_graph = Land(f"data/{wijk_number}.csv")
-    winner = Simulated_annealing(empty_graph, number_of_houses)
+    # empty_graph = Land(f"data/{wijk_number}.csv")
+    # winner = Simulated_annealing(empty_graph, number_of_houses)
 
 
     # DON'T DELETE -- WRITTEN FOR CHECK50
