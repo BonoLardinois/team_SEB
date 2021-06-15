@@ -42,19 +42,20 @@ class HillClimber():
         current_best_value = copy_map.total
         counter = 0
         # steps = 8
-        iterations = 5
+        iterations = 30
 
         # data for iteration graph
         iteration_counter = 0
         results = []
         total_iterations = []
+        # steps = 2
         for i in range(iterations):
 
-            if i < 10:
+            if i < 7:
                 steps = 8 
-            if i >= 10 and i < 15:
+            if i >= 7 and i < 13:
                 steps = 4
-            if i >= 15 and i < 20:
+            if i >= 13 and i < 20:
                 steps = 2
             if i >= 20:
                 steps = 1
@@ -172,12 +173,13 @@ class HillClimber():
         # calculates value for return object
         copy_map.calculate_distance(copy_map.all_land_objects)
         total_value_up = copy_map.calculate_price(copy_map.all_land_objects)
-
-        print(f"copy map: {copy_map.total}")
-        print(f"copy map: {generations[0]}")
+        copy_map.calculate_price_real(copy_map.all_land_objects)
         
-        print(total_iterations)
-        print(results)
+        print(f"total: {copy_map.total}")
+        print(f"total_real: {copy_map.total_real}")
+        
+        # print(total_iterations)
+        # print(results)
         
         plt.plot(total_iterations, results)
         plt.xlabel('x - axis')

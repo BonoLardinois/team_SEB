@@ -14,6 +14,7 @@ class Land():
         self.depth = 160
         self.all_land_objects = []
         self.total = 0
+        self.total_real = 0
         self.water = []
         self.load_water(source_file)
         #self.load_houses(number_houses)
@@ -75,7 +76,8 @@ class Land():
                 all_polygons.remove(house.polygon)
                 polygons = MultiPolygon(all_polygons)
                 nearest_geom = nearest_points(origin, polygons)
-                extra_space = math.floor(nearest_geom[0].distance(nearest_geom[1]))
+                # extra_space = math.floor(nearest_geom[0].distance(nearest_geom[1]))
+                extra_space = nearest_geom[0].distance(nearest_geom[1])
                 house.nearest_neighbour = extra_space
                 all_polygons.append(house.polygon)        
 
@@ -98,6 +100,27 @@ class Land():
                 self.total += house.price
         
         return self.total
+
+
+    def calculate_price_real(self, houses):
+        '''
+        Calculate price of house and total price of land
+        '''
+
+        for house in houses:
+            if house.name == "familyhome":
+                house.price = 285000 + (285000 * 0.03 * math.floor(house.nearest_neighbour))
+                self.total_real += house.price
+
+            elif house.name == "bungalow":
+                house.price = 399000 + (399000 * 0.04 * math.floor(house.nearest_neighbour))
+                self.total_real += house.price
+
+            elif house.name == "maison":
+                house.price = 610000 + (610000 * 0.06 * math.floor(house.nearest_neighbour))
+                self.total_real += house.price
+        
+        return self.total_real
 
 
 
