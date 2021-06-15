@@ -32,21 +32,23 @@ if __name__ == "__main__":
     # # ---------------------------------------------------------------
 
     # --------------------------- Hill Climber  --------------------------
+    empty_graph = Land(f"data/{wijk_number}.csv")
     results = []
     winner = None
-    for i in range(12):
-        empty_graph = Land(f"data/{wijk_number}.csv")
-        starting_graph = Randomise(empty_graph, number_of_houses, 12)
+    counter = 0
+    for i in range(3):
+        starting_graph = Randomise(empty_graph, number_of_houses, 100)
         winner_graph = HillClimber(starting_graph.winner)
         results.append(winner_graph.winner.total_real)
-        
+
         if winner == None:
             winner = winner_graph
         if winner_graph.winner.total_real > winner.winner.total_real:
             winner = winner_graph
-    
-    # winner_graph.winner.total_real
-    visualise(winner_graph.winner.all_land_objects, winner_graph.winner.total_real)
+        counter += 1
+        print(counter) 
+
+    visualise(winner.winner.all_land_objects, winner.winner.total_real)
 
     # ---------------------------------------------------------------------
 

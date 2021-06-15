@@ -113,7 +113,7 @@ class Randomise():
                 highest_scoring_map = resulting_map
                 highest_score = total_value
 
-            print(total_value)
+            # print(total_value)
         
         return highest_scoring_map
     
