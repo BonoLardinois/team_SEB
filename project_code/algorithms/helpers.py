@@ -8,8 +8,6 @@ def random_choice(choices):
     return (random.choice(choices))
 
 def swap_with_random_rotation(start_map):
-    start_map.calculate_distance
-    print(f"before swap: {start_map.calculate_price}")
     copy_start_map = deepcopy(start_map)
     house1 = random_choice(copy_start_map.all_land_objects)
     house2 = random_choice(copy_start_map.all_land_objects)
@@ -61,13 +59,11 @@ def swap_with_random_rotation(start_map):
     return start_map
 
 def rotate(start_map):
-    start_map.calculate_distance
-    print(f"before rotate: {start_map.calculate_price}")
     copy_start_map = deepcopy(start_map)
     old_house = random_choice(copy_start_map.all_land_objects)
 
     while (old_house.name == 'water'):
-        old_house = self.random_choice(copy_start_map.all_land_objects)
+        old_house = random_choice(copy_start_map.all_land_objects)
     
     placement = old_house.placement
     if placement == 'vertical':
