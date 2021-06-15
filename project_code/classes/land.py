@@ -114,7 +114,7 @@ class Land():
                 if house.polygon_free_space.intersects(land_object.polygon) == True or land_object.polygon_free_space.intersects(house.polygon_free_space) == True:
                     return False     
             elif land_object.name == 'water':
-                if land_object.polygon.intersects(house.polygon) == True:
+                if land_object.polygon.intersects(house.polygon) == True or house.polygon.intersects(land_object.polygon) == True:
                     return False
         return True
 

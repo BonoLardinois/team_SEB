@@ -64,10 +64,11 @@ class Randomise():
                     polygon_free_space = rotation_finished[3]
 
                     # get coordinates with required free space
-                    coordinates_with_free_space = tuple((coordinates[0] + required_free_space, coordinates[1] + required_free_space))
+                    coordinates_no_free_space = tuple((coordinates[0] + required_free_space, coordinates[1] + required_free_space))
 
                     # make house object
-                    house = House(house_type, width, depth, price, coordinates_with_free_space, polygon, required_free_space, polygon_free_space)
+                    house = House(house_type, width, depth, price, coordinates_no_free_space, polygon, required_free_space, polygon_free_space)
+                    house.placement = placement
 
                     # check if overlap
                     overlap = housing_map.overlap(house) 
