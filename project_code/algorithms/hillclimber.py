@@ -32,6 +32,7 @@ class HillClimber():
         current_best_value = copy_map.total
         counter = 0
         iterations = 35
+        steps = 1
 
         # data for iteration graph
         iteration_counter = 0
@@ -40,14 +41,14 @@ class HillClimber():
 
         for i in range(iterations):
 
-            if i < 7:
-                steps = 4 
-            if i >= 7 and i < 13:
-                steps = 4
-            if i >= 13 and i < 20:
-                steps = 2
-            if i >= 20:
-                steps = 1
+            # if i < 7:
+            #     steps = 4 
+            # if i >= 7 and i < 13:
+            #     steps = 4
+            # if i >= 13 and i < 20:
+            #     steps = 2
+            # if i >= 20:
+            #     steps = 1
 
             for house in copy_map.all_land_objects:
                 copy_map.total = 0
@@ -116,7 +117,71 @@ class HillClimber():
                         generations.pop(0)          
                         generations.append("down")
                         current_best_value = total_value_down
+
+                    # moves house top right corner
+                    total_value_top_right_corner = 0
+                    house.move(steps, steps)
                     
+                    # checks for overlap
+                    if self.valid_move(house, housing_map.water):
+                        copy_map.calculate_distance(copy_map.all_land_objects)
+                        total_value_top_right_corner = copy_map.calculate_price(copy_map.all_land_objects)
+                    house.move(-steps, -steps)
+                    copy_map.total = 0
+
+                    if total_value_top_right_corner > current_best_value:
+                        generations.pop(0)          
+                        generations.append("top_right_corner")
+                        current_best_value = total_value_top_right_corner  
+
+                    # moves house top left corner
+                    total_value_top_left_corner = 0
+                    house.move(-steps, steps)
+                    
+                    # checks for overlap
+                    if self.valid_move(house, housing_map.water):
+                        copy_map.calculate_distance(copy_map.all_land_objects)
+                        total_value_top_left_corner = copy_map.calculate_price(copy_map.all_land_objects)
+                    house.move(steps, -steps)
+                    copy_map.total = 0
+
+                    if total_value_top_left_corner > current_best_value:
+                        generations.pop(0)          
+                        generations.append("top_left_corner")
+                        current_best_value = total_value_top_left_corner 
+                    
+                    # moves house bottom right corner
+                    total_value_bottom_right_corner = 0
+                    house.move(steps, -steps)
+                    
+                    # checks for overlap
+                    if self.valid_move(house, housing_map.water):
+                        copy_map.calculate_distance(copy_map.all_land_objects)
+                        total_value_bottom_right_corner = copy_map.calculate_price(copy_map.all_land_objects)
+                    house.move(-steps, steps)
+                    copy_map.total = 0
+
+                    if total_value_bottom_right_corner > current_best_value:
+                        generations.pop(0)          
+                        generations.append("bottom_right_corner")
+                        current_best_value = total_value_bottom_right_corner  
+                    
+                    # moves house bottom left corner
+                    total_value_bottom_left_corner = 0
+                    house.move(-steps, -steps)
+                    
+                    # checks for overlap
+                    if self.valid_move(house, housing_map.water):
+                        copy_map.calculate_distance(copy_map.all_land_objects)
+                        total_value_bottom_left_corner = copy_map.calculate_price(copy_map.all_land_objects)
+                    house.move(steps, steps)
+                    copy_map.total = 0
+
+                    if total_value_bottom_left_corner > current_best_value:
+                        generations.pop(0)          
+                        generations.append("bottom_left_corner")
+                        current_best_value = total_value_bottom_left_corner 
+                                               
                     # makes the decisive move based upon the best value
                     if generations[0] == "right":
                         house.move(steps, 0)
@@ -126,11 +191,20 @@ class HillClimber():
                         house.move(0, steps)
                     elif generations[0] == "down":
                         house.move(0, -steps)
-                    
+                    elif generations[0] == "top_right_corner":
+                        house.move(steps, steps)
+                    elif generations[0] == "top_left_corner":
+                        house.move(-steps, steps)
+                    elif generations[0] == "bottom_right_corner":
+                        house.move(steps, -steps)
+                    elif generations[0] == "bottom_left_corner":
+                        house.move(-steps, -steps)
+
+
                     generations = ["copy_map"]
 
             counter += 1
-
+            print(counter)
             # data for iteration graph
             iteration_counter += 1
             total_iterations.append(iteration_counter)
