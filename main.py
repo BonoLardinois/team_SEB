@@ -37,7 +37,7 @@ if __name__ == "__main__":
     winner = None
     counter = 0
     for i in range(1):
-        starting_graph = Randomise(empty_graph, number_of_houses, 1)
+        starting_graph = Randomise(empty_graph, number_of_houses, 10)
         winner_graph = HillClimber(starting_graph.winner)
         results.append(winner_graph.winner.total_real)
 

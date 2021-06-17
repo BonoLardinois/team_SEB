@@ -31,8 +31,8 @@ class HillClimber():
         generations.append("copy_map")
         current_best_value = copy_map.total
         counter = 0
-        iterations = 12
-        steps = 1
+        iterations = 40
+        # steps = 2
 
         # data for iteration graph
         iteration_counter = 0
@@ -41,14 +41,14 @@ class HillClimber():
 
         for i in range(iterations):
 
-            # if i < 18:
-            #     steps = 2
-            # if i >= 7 and i < 13:
-            #     steps = 4
-            # if i >= 13 and i < 20:
-            #     steps = 2
-            # if i >= 18:
-            #     steps = 1
+            if i < 18:
+                steps = 2
+            if i >= 7 and i < 13:
+                steps = 4
+            if i >= 13 and i < 20:
+                steps = 2
+            if i >= 18:
+                steps = 1
 
             for house in copy_map.all_land_objects:
                 copy_map.total = 0
@@ -218,10 +218,10 @@ class HillClimber():
         print(f"total: {copy_map.total}")
         print(f"total_real: {copy_map.total_real}")
         
-        for house in copy_map.all_land_objects:
-            if house.name != "water":
-                # if house.nearest_neighbour < house.free_space:
-                print(f"fine: {house.fine}")
+        # for house in copy_map.all_land_objects:
+        #     if house.name != "water":
+        #         # if house.nearest_neighbour < house.free_space:
+        #         print(f"fine: {house.fine}")
 
         plt.plot(total_iterations, results)
         plt.xlabel('x - axis')
