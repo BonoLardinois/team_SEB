@@ -4,6 +4,7 @@ from sys import argv
 from project_code.algorithms.render_randomise import Randomise
 from project_code.algorithms.genetic import Genetic
 from project_code.algorithms.hillclimberswap import Hillclimber
+from project_code.algorithms.hillclimber import HillClimber
 from project_code.algorithms.simulated_annealing import Simulated_annealing
 import cProfile
 import csv
@@ -28,7 +29,7 @@ if __name__ == "__main__":
     
     # --------------------------- Random  --------------------------
     # empty_graph = Land(f"data/{wijk_number}.csv")
-    # winner_graph = Randomise(empty_graph, number_of_houses, 400)
+    # winner_graph = Randomise(empty_graph, number_of_houses, 20)
     # visualise(winner_graph.winner.all_land_objects, winner_graph.winner.total, len(winner_graph.winner.all_land_objects))
 
     # # --------------------------- Hillclimber swap ---------------------------
@@ -50,17 +51,17 @@ if __name__ == "__main__":
     
 
     # # --------------------------- Simulated annealing  --------------------------
-    empty_graph = Land(f"data/{wijk_number}.csv")
-    winner = Simulated_annealing(empty_graph, number_of_houses).end_result
-    visualise(winner.all_land_objects, winner.total, len(winner.all_land_objects))
+    # empty_graph = Land(f"data/{wijk_number}.csv")
+    # winner = Simulated_annealing(empty_graph, number_of_houses).end_result
+    # visualise(winner.all_land_objects, winner.total, len(winner.all_land_objects))
 
     # --------------------------- Hill Climber  --------------------------
     empty_graph = Land(f"data/{wijk_number}.csv")
     results = []
     winner = None
     counter = 0
-    for i in range(1):
-        starting_graph = Randomise(empty_graph, number_of_houses, 10)
+    for i in range(5):
+        starting_graph = Randomise(empty_graph, number_of_houses, 100)
         winner_graph = HillClimber(starting_graph.winner)
         results.append(winner_graph.winner.total_real)
 
@@ -71,7 +72,7 @@ if __name__ == "__main__":
         counter += 1
         print(counter) 
 
-    visualise(winner.winner.all_land_objects, winner.winner.total_real)
+    visualise(winner.winner.all_land_objects, winner.winner.total_real, len(winner.winner.all_land_objects))
 
     # ---------------------------------------------------------------------
 

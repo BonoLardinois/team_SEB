@@ -31,7 +31,7 @@ class HillClimber():
         generations.append("copy_map")
         current_best_value = copy_map.total
         counter = 0
-        iterations = 40
+        iterations = 30
         # steps = 2
 
         # data for iteration graph
@@ -41,13 +41,13 @@ class HillClimber():
 
         for i in range(iterations):
 
-            if i < 18:
-                steps = 2
+            if i < 7:
+                steps = 8
             if i >= 7 and i < 13:
                 steps = 4
             if i >= 13 and i < 20:
                 steps = 2
-            if i >= 18:
+            if i >= 20:
                 steps = 1
 
             for house in copy_map.all_land_objects:
@@ -65,7 +65,7 @@ class HillClimber():
                     house.move(-steps, 0)
                     copy_map.total = 0
 
-                    if total_value_right > current_best_value:
+                    if total_value_right >= current_best_value:
                         generations.pop(0)
                         generations.append("right")
                         current_best_value = total_value_right
@@ -81,7 +81,7 @@ class HillClimber():
                     house.move(steps, 0)
                     copy_map.total = 0
 
-                    if total_value_left > current_best_value:
+                    if total_value_left >= current_best_value:
                         generations.pop(0)
                         generations.append("left")   
                         current_best_value = total_value_left            
@@ -97,7 +97,7 @@ class HillClimber():
                     house.move(0, -steps)
                     copy_map.total = 0
 
-                    if total_value_up > current_best_value:
+                    if total_value_up >= current_best_value:
                         generations.pop(0)
                         generations.append("up")
                         current_best_value = total_value_up
@@ -113,7 +113,7 @@ class HillClimber():
                     house.move(0, steps)
                     copy_map.total = 0
 
-                    if total_value_down > current_best_value:
+                    if total_value_down >= current_best_value:
                         generations.pop(0)          
                         generations.append("down")
                         current_best_value = total_value_down
@@ -129,7 +129,7 @@ class HillClimber():
                     house.move(-steps, -steps)
                     copy_map.total = 0
 
-                    if total_value_top_right_corner > current_best_value:
+                    if total_value_top_right_corner >= current_best_value:
                         generations.pop(0)          
                         generations.append("top_right_corner")
                         current_best_value = total_value_top_right_corner  
@@ -145,7 +145,7 @@ class HillClimber():
                     house.move(steps, -steps)
                     copy_map.total = 0
 
-                    if total_value_top_left_corner > current_best_value:
+                    if total_value_top_left_corner >= current_best_value:
                         generations.pop(0)          
                         generations.append("top_left_corner")
                         current_best_value = total_value_top_left_corner 
@@ -161,7 +161,7 @@ class HillClimber():
                     house.move(-steps, steps)
                     copy_map.total = 0
 
-                    if total_value_bottom_right_corner > current_best_value:
+                    if total_value_bottom_right_corner >= current_best_value:
                         generations.pop(0)          
                         generations.append("bottom_right_corner")
                         current_best_value = total_value_bottom_right_corner  
@@ -177,7 +177,7 @@ class HillClimber():
                     house.move(steps, steps)
                     copy_map.total = 0
 
-                    if total_value_bottom_left_corner > current_best_value:
+                    if total_value_bottom_left_corner >= current_best_value:
                         generations.pop(0)          
                         generations.append("bottom_left_corner")
                         current_best_value = total_value_bottom_left_corner 
