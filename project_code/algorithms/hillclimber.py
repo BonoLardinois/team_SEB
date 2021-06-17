@@ -20,7 +20,10 @@ class HillClimber():
         # checks if house crosses the land border
         if house.bottom_left[0] < house.free_space or house.bottom_left[0] > 180 - house.width_with_freespace or house.bottom_left[1] < house.free_space or house.bottom_left[1] > 160 - house.depth_with_freespace or house.top_right[0] < house.width_with_freespace or house.top_right[0] > 180 - house.free_space or house.top_right[1] < house.depth_with_freespace or house.top_right[1] > 160 - house.free_space:
             return False
-    
+
+        if house.nearest_neighbour < house.free_space:
+            print("there is overlap")
+
         return True
 
     def run(self, housing_map):
@@ -31,8 +34,8 @@ class HillClimber():
         generations.append("copy_map")
         current_best_value = copy_map.total
         counter = 0
-        iterations = 35
-        steps = 1
+        iterations = 1
+        steps = 30
 
         # data for iteration graph
         iteration_counter = 0
@@ -41,13 +44,13 @@ class HillClimber():
 
         for i in range(iterations):
 
-            # if i < 7:
-            #     steps = 4 
+            # if i < 18:
+            #     steps = 2
             # if i >= 7 and i < 13:
             #     steps = 4
             # if i >= 13 and i < 20:
             #     steps = 2
-            # if i >= 20:
+            # if i >= 18:
             #     steps = 1
 
             for house in copy_map.all_land_objects:
