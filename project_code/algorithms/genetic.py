@@ -4,16 +4,16 @@ from project_code.visualisations.visualise import visualise
 from shapely.geometry import Polygon
 from project_code.algorithms.randomise import randomise_coordinates
 from copy import deepcopy
-import random
 from project_code.algorithms.rotation import rotation
 import matplotlib.pyplot as plt
 from random import choice
 
-DIRECTIONS = ["UP","RIGHT","DOWN","LEFT"]
+DIRECTIONS = ["UP","RIGHT","DOWN","LEFT", "TOP_RIGHT", "BOTTOM_RIGHT", "TOP_LEFT", "BOTTOM_LEFT"]
 STEPS = 10
-NR_MOVES = 5
+NR_MOVES = 8
 GENERATIONS = 4
-TOP_X = 50
+TOP_X = 20
+
 
 def do_random_move(land):
     # create local variables to use in both loops
@@ -36,12 +36,22 @@ def do_random_move(land):
             house.move(STEPS,0)
         elif direction == "DOWN":
             house.move(0,-STEPS)
-        else:
+        elif direction == "LEFT":
             house.move(-STEPS,0)
+        elif direction == "TOP_RIGHT":
+            house.move(STEPS, STEPS)
+        elif direction == "TOP_LEFT":
+            house.move(-STEPS, STEPS)
+        elif direction == "BOTTOM_RIGHT":
+            house.move(STEPS, -STEPS)
+        else:
+            house.move(-STEPS, -STEPS)
         if check_valid(land, house):
             # if there is no overlap we add the random house
             land.all_land_objects[i] = house
             break
+
+    print(load_map(land))
     return land
 
 def check_valid(land, house):
@@ -101,12 +111,8 @@ class Genetic():
                 required_free_space = values[4]
                 price = values[6]
                 overlap = True
-                placement = random.choice(['horizontal', 'vertical'])
-                counter = 0
+                placement = choice(['horizontal', 'vertical'])
                 while (overlap):
-                    if counter == 200:
-                        counter = 0
-                        break
                     # get coordinates
                     coordinates = randomise_coordinates(width_with_required_free_space, depth_with_required_free_space)
 
@@ -125,7 +131,6 @@ class Genetic():
 
                     # check if overlap
                     overlap = housing_map.overlap(house) 
-                    counter += 1
 
         return (housing_map)
 
@@ -194,21 +199,20 @@ class Genetic():
 
             results.append(new_generation[0][1])
 
-        print(total_generations)
-        print(results)
         
         # visualise iterations graph
         plt.plot(total_generations, results)
         plt.xlabel('x axis')
         plt.ylabel('y axis') 
         plt.title('Graph')
+        plt.margins(0,0)
         plt.savefig('output/genetic_graph.png')
 
         # return the housing map with the best value
         return generation[0][0]
    
 
-
+    
             
         
     
