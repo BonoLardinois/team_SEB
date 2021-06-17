@@ -1,15 +1,15 @@
 import random
 import math
 from .render_randomise import Randomise
-from .helpers import swap_with_random_rotation, rotate
+from .helpers import swap_with_random_rotation, rotate, move_house
+from copy import deepcopy
 
 class Simulated_annealing():
 
     def __init__(self, empty_graph, number_houses):
         self.start_map = Randomise(empty_graph, number_houses, 400).winner
         self.calc_price(self.start_map)
-        self.simulated_annealing(self.start_map)
-        self.end_result = None
+        self.end_result = self.simulated_annealing(self.start_map)
 
     def calc_price(self, land_map):
         land_map.calculate_distance(land_map.all_land_objects)
@@ -19,59 +19,95 @@ class Simulated_annealing():
     
     def simulated_annealing(self, start_map):
         # temp bepalen aan de hand van plotje. niet nooit verslechteren. 
-        temp = 10100
+        temp = 6514
         alpha = 0.1
-        final_temp = 10000
+        final_temp = 0.99
 
         current_temp = temp
 
-        current_state = self.start_map
+        current_state = deepcopy(self.start_map)
+        counter = 0
 
         while current_temp > final_temp:
 
-                # iets doen met de huidige map
-                    # dus huisje uitzoeken en dan:
+            next_move = random.choice(['rotate', 'move', 'swap'])
+            
+            # iets doen met de huidige map
+            highest_map = current_state
+
             # - draaien
-            rotated_map = rotate(current_state)
-            self.calc_price(rotated_map)
+            if next_move == 'rotate':
+                rotated_map = rotate(highest_map)
+                highest_map = rotated_map
+            # if self.calc_price(rotated_map) > self.calc_price(highest_map):
+            #     highest_map = rotated_map
 
             # - verplaatsen 
+            # moved_map = move_house(rotated_map)
+            elif next_move == 'move':
+                moved_map = move_house(highest_map)
+                highest_map = moved_map
+            # if self.calc_price(moved_map) > self.calc_price(highest_map):
+            #     highest_map = moved_map
 
             # - verwisselen
-            swapped_map = swap_with_random_rotation(rotated_map)
-            self.calc_price(swapped_map)
+            elif next_move == 'swap':
+                swapped_map = swap_with_random_rotation(highest_map)
+                highest_map = swapped_map
+            # if self.calc_price(swapped_map) > self.calc_price(highest_map):
+            #     highest_map = swapped_map
 
-            new_map = swapped_map
+            # new_map = moved_map
+            new_map = highest_map
 
             # checken wat het vershil in totale prijs is
             price_new_map = self.calc_price(new_map)
+            # print(f"current state: {current_state.total}")
+            # print(f"new state: {price_new_map}")
             difference = price_new_map - current_state.total
-            # print(difference)
+            if difference == 0.0:
+                counter += 1
+                if counter == 500:
+                    current_temp = 6514
+                if counter == 1000:
+                    current_temp = 6514
+            # else:
+            #     counter = 0 
+            print(counter)
+            
+
+            # print(f"difference: {difference}")
+
 
             # als de nieuwe kaart beter is dan moet dit de huidige kaart vervangen
-            if difference > 0:
-                current_state = new_map
-                # als dit gebeurt moet ook de current temp - alpha
-                current_temp = current_temp - alpha
+            if difference >= 0:
+                current_state = deepcopy(new_map)
                 
-            # als de nieuwe kaart niet beter is dan moet deze alsnog worden geaccepteerd maar met een probabillity??
-            if difference < 0:
-                probability = math.exp((-(difference))/current_temp)
-                random_number = random.uniform(0,1)
-                if random_number > probability:
-                    current_state = new_map
-                    current_temp = current_temp - alpha
-                current_temp = current_temp - alpha    
+            print(f"difference: {difference}")
+            # print(f"current temp: {current_temp}")
+            probability = math.exp(difference/current_temp)
+            random_number = random.uniform(0,1)
+            # print(f"random: {random_number}")
+            # print(f"prob: {probability}")
+            if random_number < probability:
+                # print("true")
+                current_state = deepcopy(new_map)
+  
+            current_temp = current_temp - alpha
             # print(current_temp)
-            # print(current_state.total)
+            # if current_temp < 3000 and counter == 0:
+            #     current_temp = 4000
+            #     counter += 1
+            # if current_temp < 100 and counter == 1:
+            #     current_temp = 3000
+            #     counter += 1
+            # # if current_temp < 100 and counter == 2:
+            # #     current_temp = 2000
+            print(current_temp)
+            print(counter)
+            print(current_state.total)
+            
 
-        print(current_state.total)
-        self.end_result = current_state
 
-                # nieuwe kaart 
-                # # probability = 2^(- (verschil nieuwe en oude prijs)/temp)
-                # if random getal(tussen 0 en 1) > probability
-                #     dan wijziging terugdraaien
-                #     # als dit gebeurt moet ook de current temp - alpha
-
-
+        
+        return current_state

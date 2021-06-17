@@ -1,5 +1,7 @@
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
+# from mpl_toolkits.mplot3d import Axes3D
+# from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 
 def visualise(land_objects, total, number_land_objects, out_path="output/test.png"):
 
@@ -24,10 +26,24 @@ def visualise(land_objects, total, number_land_objects, out_path="output/test.pn
             ax.add_patch(rectangle)   
 
     # Plot
+    # 3d plot
+    # fig = plt.figure()
+    # ax = Axes3D(fig)
+    # x = [0,1,1,0]
+    # y = [0,0,1,1]
+    # z = [0,1,0,1]
+    # verts = [zip(x,y,z)]
+    # ax.add_collection3d(Poly3DCollection(verts), zs=z)  
+
+    #normal plot
     plt.plot(180 , 160)
     plt.title(f'Housing map, total: {total}, number land objects: {number_land_objects}')
     plt.xlabel('width')
     plt.ylabel('depth')
+    # plt.zlabel('height')
+    ax.set_ylim(ymin=0)
+    ax.set_xlim(xmin=0)
+
     plt.savefig(out_path)
     
    
