@@ -49,21 +49,35 @@ if __name__ == "__main__":
     # visualise(winner_graph.winner.all_land_objects, winner_graph.winner.total, f"Number of houses: {counter}")
     
 
-    # # --------------------------- Hill Climber  --------------------------
-    # empty_graph = Land(f"data/{wijk_number}.csv")
-    # starting_graph = Randomise(empty_graph, number_of_houses, 12)
-    # winner_graph = HillClimber(starting_graph.winner)
-    # visualise(winner_graph.winner.all_land_objects, winner_graph.winner.total)
-
     # # --------------------------- Simulated annealing  --------------------------
     empty_graph = Land(f"data/{wijk_number}.csv")
     winner = Simulated_annealing(empty_graph, number_of_houses).end_result
     visualise(winner.all_land_objects, winner.total, len(winner.all_land_objects))
 
+    # --------------------------- Hill Climber  --------------------------
+    empty_graph = Land(f"data/{wijk_number}.csv")
+    results = []
+    winner = None
+    counter = 0
+    for i in range(1):
+        starting_graph = Randomise(empty_graph, number_of_houses, 10)
+        winner_graph = HillClimber(starting_graph.winner)
+        results.append(winner_graph.winner.total_real)
 
+        if winner == None:
+            winner = winner_graph
+        if winner_graph.winner.total_real > winner.winner.total_real:
+            winner = winner_graph
+        counter += 1
+        print(counter) 
+
+    visualise(winner.winner.all_land_objects, winner.winner.total_real)
+
+    # ---------------------------------------------------------------------
 
     # DON'T DELETE -- WRITTEN FOR CHECK50
     #
+
     # with open("output.csv", "w", newline="") as file:
     #     writer = csv.writer(file)
     #     writer.writerow(["structure","corner_1","corner_2","corner_3","corner_4","type"])
