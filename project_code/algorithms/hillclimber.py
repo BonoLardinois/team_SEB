@@ -21,9 +21,6 @@ class HillClimber():
         if house.bottom_left[0] < house.free_space or house.bottom_left[0] > 180 - house.width_with_freespace or house.bottom_left[1] < house.free_space or house.bottom_left[1] > 160 - house.depth_with_freespace or house.top_right[0] < house.width_with_freespace or house.top_right[0] > 180 - house.free_space or house.top_right[1] < house.depth_with_freespace or house.top_right[1] > 160 - house.free_space:
             return False
 
-        if house.nearest_neighbour < house.free_space:
-            print("there is overlap")
-
         return True
 
     def run(self, housing_map):
@@ -34,8 +31,8 @@ class HillClimber():
         generations.append("copy_map")
         current_best_value = copy_map.total
         counter = 0
-        iterations = 1
-        steps = 30
+        iterations = 12
+        steps = 1
 
         # data for iteration graph
         iteration_counter = 0
@@ -207,7 +204,7 @@ class HillClimber():
                     generations = ["copy_map"]
 
             counter += 1
-            print(counter)
+            print(f"counter: {counter}")
             # data for iteration graph
             iteration_counter += 1
             total_iterations.append(iteration_counter)
@@ -221,6 +218,11 @@ class HillClimber():
         print(f"total: {copy_map.total}")
         print(f"total_real: {copy_map.total_real}")
         
+        for house in copy_map.all_land_objects:
+            if house.name != "water":
+                # if house.nearest_neighbour < house.free_space:
+                print(f"fine: {house.fine}")
+
         plt.plot(total_iterations, results)
         plt.xlabel('x - axis')
         plt.ylabel('y - axis') 
