@@ -18,6 +18,9 @@ class House():
         self.depth_with_freespace = self.depth + (self.free_space * 2)
         self.polygon_free_space = polygon_free_space
         self.placement = None
+        self.fine = 12
+
+
 
     def __str__(self):
         return (f"name:{self.name}, left_bottom: {self.bottom_left}, top_right: {self.top_right}")
@@ -28,10 +31,6 @@ class House():
         self.bottom_left = tuple((self.bottom_left[0] + change_x, self.bottom_left[1] + change_y))
         self.top_right = tuple((self.top_right[0] + change_x, self.top_right[1] + change_y))
 
-        # # update the polygons
-        # self.polygon = Polygon([(self.bottom_left[0] + self.free_space, self.bottom_left[1] + self.free_space), (self.bottom_left[0] + self.width + self.free_space, self.bottom_left[1] + self.free_space), (self.bottom_left[0] + self.width + self.free_space, self.bottom_left[1] + self.depth + self.free_space), (self.bottom_left[0] + self.free_space, self.bottom_left[1] + self.depth + self.free_space)])
-        # self.polygon_free_space = Polygon([self.bottom_left, (self.bottom_left[0] + self.width_with_freespace, self.bottom_left[1]), (self.bottom_left[0] + self.width_with_freespace, self.bottom_left[1] + self.depth_with_freespace), (self.bottom_left[0], self.bottom_left[1] + self.depth_with_freespace)])
-        
         # update the polygons
         self.polygon = Polygon([(self.bottom_left[0], self.bottom_left[1]), (self.bottom_left[0] + self.width, self.bottom_left[1]), (self.bottom_left[0] + self.width, self.bottom_left[1] + self.depth), (self.bottom_left[0], self.bottom_left[1] + self.depth)])
         self.polygon_free_space = Polygon([(self.bottom_left[0] - self.free_space, self.bottom_left[1] - self.free_space), (self.bottom_left[0] + self.width_with_freespace - self.free_space, self.bottom_left[1] - self.free_space), (self.bottom_left[0] + self.width_with_freespace - self.free_space, self.bottom_left[1] + self.depth_with_freespace - self.free_space), (self.bottom_left[0] - self.free_space, self.bottom_left[1] + self.depth_with_freespace - self.free_space)])
@@ -46,4 +45,4 @@ class House():
         if self.top_right[1] - self.free_space < 0 or self.top_right[1] + self.free_space > depth:
             return False
         return True
-
+       

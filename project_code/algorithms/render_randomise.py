@@ -89,7 +89,7 @@ class Randomise():
             
             resulting_map.calculate_distance(resulting_map.all_land_objects)
             total_value = resulting_map.calculate_price(resulting_map.all_land_objects)
-            
+            print(total_value)
             if total_value > highest_score:
                 highest_scoring_map = resulting_map
                 highest_score = total_value
@@ -97,10 +97,4 @@ class Randomise():
         return highest_scoring_map
    
 
-
-            
-        
-    
-
-        
-       
+ 
