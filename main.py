@@ -60,7 +60,7 @@ if __name__ == "__main__":
     results = []
     winner = None
     counter = 0
-    for i in range(5):
+    for i in range(1):
         starting_graph = Randomise(empty_graph, number_of_houses, 100)
         winner_graph = HillClimber(starting_graph.winner)
         results.append(winner_graph.winner.total_real)
@@ -69,6 +69,11 @@ if __name__ == "__main__":
             winner = winner_graph
         if winner_graph.winner.total_real > winner.winner.total_real:
             winner = winner_graph
+
+        print(f"before hillclimber swap: {winner.winner.total_real}")
+        winner = Hillclimber(winner.winner, 100)
+        print(f"after hillclimber swap: {winner.winner.total_real}")
+
         counter += 1
         print(counter) 
 

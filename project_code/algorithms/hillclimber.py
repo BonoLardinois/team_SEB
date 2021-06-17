@@ -31,7 +31,7 @@ class HillClimber():
         generations.append("copy_map")
         current_best_value = copy_map.total
         counter = 0
-        iterations = 30
+        iterations = 5
         # steps = 2
 
         # data for iteration graph
