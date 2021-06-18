@@ -145,11 +145,3 @@ class Land():
                 self.total_real += house.price
         
         return self.total_real
-
-
-
- 
-
-            
-
-           

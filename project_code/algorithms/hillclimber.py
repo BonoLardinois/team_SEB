@@ -4,6 +4,7 @@ from copy import deepcopy
 from shapely.geometry import Polygon
 from project_code.visualisations.visualise import visualise
 import matplotlib.pyplot as plt
+import random
 
 class HillClimber():
 
@@ -30,30 +31,77 @@ class HillClimber():
         generations = []
         generations.append("copy_map")
         current_best_value = copy_map.total
-        counter = 0
-        iterations = 5
-        # steps = 2
+        # counter = 0
+        # iterations = 1
+        # steps = 1
 
         # data for iteration graph
         iteration_counter = 0
         results = []
         total_iterations = []
 
-        for i in range(iterations):
+        # for i in range(iterations):
 
-            if i < 7:
-                steps = 8
-            if i >= 7 and i < 13:
-                steps = 4
-            if i >= 13 and i < 20:
-                steps = 2
-            if i >= 20:
-                steps = 1
+            # if i < 7:
+            #     steps = 8
+            # if i >= 7 and i < 14:
+            #     steps = 7
+            # if i >= 14 and i < 21:
+            #     steps = 6
+            # if i >= 21 and i < 24:
+            #     steps = 5
+            # if i >= 24 and i < 28:
+            #     steps = 4
+            # if i >= 32 and i < 36:
+            #     steps = 3
+            # if i >= 40 and i < 44:
+            #     steps = 2
+            # if i >= 44:
+            #     steps = 1
 
-            for house in copy_map.all_land_objects:
+            # for house in copy_map.all_land_objects:
+        houses = []
+        for house in copy_map.all_land_objects:
+            if house.name != "water":
+                houses.append(house)
+
+        for j in range(5000):
+            house = random.choice(houses)
+            for i in range(1):
                 copy_map.total = 0
                 if house.name != "water":
-
+                    if i == 0:
+                        steps = 1
+                    if i == 1:
+                        steps = 7
+                    if i == 2:
+                        steps = 6
+                    if i == 3:
+                        steps = 5
+                    if i == 4:
+                        steps = 4
+                    if i == 5:
+                        steps = 3
+                    if i == 6:
+                        steps = 2
+                    if i == 7:
+                        steps = 1
+                    # if i < 2:
+                    #     steps = 8
+                    # if i >= 2 and i < 4:
+                    #     steps = 7
+                    # if i >= 4 and i < 6:
+                    #     steps = 6
+                    # if i >= 6 and i < 8:
+                    #     steps = 5
+                    # if i >= 8 and i < 10:
+                    #     steps = 4
+                    # if i >= 10 and i < 12:
+                    #     steps = 3
+                    # if i >= 12 and i < 14:
+                    #     steps = 2
+                    # if i >= 14:
+                    #     steps = 1
                     # moves house to the right
                     total_value_right = 0
                     house.move(steps, 0)
@@ -181,7 +229,7 @@ class HillClimber():
                         generations.pop(0)          
                         generations.append("bottom_left_corner")
                         current_best_value = total_value_bottom_left_corner 
-                                               
+                                                
                     # makes the decisive move based upon the best value
                     if generations[0] == "right":
                         house.move(steps, 0)
@@ -203,12 +251,14 @@ class HillClimber():
 
                     generations = ["copy_map"]
 
-            counter += 1
-            print(f"counter: {counter}")
-            # data for iteration graph
-            iteration_counter += 1
-            total_iterations.append(iteration_counter)
-            results.append(current_best_value)
+                    # counter += 1
+                    # print(f"counter: {counter}")
+
+                    # data for iteration graph
+                    iteration_counter += 1
+                    print(iteration_counter)
+                    total_iterations.append(iteration_counter)
+                    results.append(current_best_value)
 
         # calculates value for return object
         copy_map.calculate_distance(copy_map.all_land_objects)
