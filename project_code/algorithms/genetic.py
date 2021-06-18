@@ -6,12 +6,13 @@ from project_code.algorithms.randomise import randomise_coordinates
 from copy import deepcopy
 from project_code.algorithms.rotation import rotation
 import matplotlib.pyplot as plt
-from random import choice
+from random import choice, randrange
+from .helpers import swap_with_random_rotation
 
-DIRECTIONS = ["UP","RIGHT","DOWN","LEFT", "TOP_RIGHT", "BOTTOM_RIGHT", "TOP_LEFT", "BOTTOM_LEFT"]
-STEPS = 10
-NR_MOVES = 8
-GENERATIONS = 4
+DIRECTIONS = ["UP","RIGHT","DOWN","LEFT","TOP_RIGHT", "BOTTOM_RIGHT", "TOP_LEFT", "BOTTOM_LEFT"]
+STEPS = randrange(1, 10)
+NR_MOVES = 10
+GENERATIONS = 5
 TOP_X = 20
 
 
@@ -51,7 +52,6 @@ def do_random_move(land):
             land.all_land_objects[i] = house
             break
 
-    print(load_map(land))
     return land
 
 def check_valid(land, house):
@@ -153,18 +153,18 @@ class Genetic():
             value = resulting_map.calculate_price(resulting_map.all_land_objects)
 
             # add map to list
-            generation.append((resulting_map,value))
+            generation.append((resulting_map, value))
 
         # sort generation by value of map
         generation = sorted(generation,key=lambda z : z[1],reverse=True)
         # print(generation[0][1])
 
 
-
         results = []
         total_generations = []
 
         generation_counter = 0
+
 
 
         # for a number of generations, create new generation
@@ -175,23 +175,28 @@ class Genetic():
             for g in range(len(generation)):
                 for x in range(NR_MOVES):
                     new_map = deepcopy(generation[g][0]) 
-                    new_map = do_random_move(new_map)
-                    new_map.calculate_distance(new_map.all_land_objects)
-                    value = new_map.calculate_price(new_map.all_land_objects)
-                    new_generation.append((new_map, value))
-                    
+
+                    swapped_map = swap_with_random_rotation(new_map)
+
+                    swapped_map = do_random_move(swapped_map)
+                    swapped_map.calculate_distance(swapped_map.all_land_objects)
+                    value = swapped_map.calculate_price(swapped_map.all_land_objects)
+
+                    new_generation.append((swapped_map, value))
+
+                            
                 new_generation.append(generation[g])
             
             # sort this new generation by value and keep top X
             new_generation = sorted(new_generation,key=lambda z : z [1], reverse=True)
             generation = new_generation[:TOP_X]
 
-            # for i in range(5): -- {z}__{i}
-            # visualise(generation[z][0].all_land_objects,generation[0][1],f'output/intermediate_generation{z}.png')
+            # for i in range(5): 
+            #     visualise(generation[i][0].all_land_objects,generation[0][1],f'output/intermediate_generation{z}__{i}.png')
 
             # print value of the best map from this new generation
             print(new_generation[0][1])
-
+        
             # keep track of iterations
             generation_counter += 1
             total_generations.append(generation_counter)
