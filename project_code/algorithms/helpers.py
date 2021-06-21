@@ -66,11 +66,11 @@ def rotate(start_map):
     while (old_house.name == 'water'):
         old_house = random_choice(copy_start_map.all_land_objects)
     
-    placement = old_house.placement
-    if placement == 'vertical':
-        rotation_finished = rotation(old_house.bottom_left, old_house.width, old_house.depth, 'horizontal', old_house.free_space)
-    else:
-        rotation_finished = rotation(old_house.bottom_left, old_house.width, old_house.depth, 'vertical', old_house.free_space)
+    # placement = old_house.placement
+    # if placement == 'vertical':
+        # rotation_finished = rotation(old_house.bottom_left, old_house.width, old_house.depth, 'horizontal', old_house.free_space)
+    # else:
+    rotation_finished = rotation(old_house.bottom_left, old_house.width, old_house.depth, 'vertical', old_house.free_space)
 
     new_house = House(old_house.name, rotation_finished[0], rotation_finished[1], old_house.price, old_house.bottom_left, rotation_finished[2], old_house.free_space, rotation_finished[3])
     copy_start_map.all_land_objects.remove(old_house)
@@ -320,3 +320,4 @@ def move_house(start_map):
                 best_map = copy_start_map
 
     return best_map
+

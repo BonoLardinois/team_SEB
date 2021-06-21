@@ -53,10 +53,9 @@ class Simulated_annealing():
             new_map = highest_map
 
             # checken wat het vershil in totale prijs is
-            price_new_map = round(self.calc_price(new_map), 2)
-            print(f"price new map:{price_new_map}")
+            price_new_map = self.calc_price(new_map)
 
-            difference = price_new_map - round(current_state.total, 2)
+            difference = price_new_map - current_state.total
             if counter2 <= 25:
                 if difference == 0.0:
                     counter += 1
@@ -67,13 +66,14 @@ class Simulated_annealing():
                             current_temp = 6500
                 else:
                     counter = 0 
-                print(counter)
+                # print(counter)
                 
-                print(counter2)
+                # print(counter2)
 
-            print(f"difference: {difference}")
+            # print(f"difference: {difference}")
 
             # if price stays the same for 10000 times the algoritm stops
+            print(price_counter)
             if price_new_map == current_state.total:
                 price_counter += 1
                 if price_counter >= 10000:
@@ -92,6 +92,6 @@ class Simulated_annealing():
   
             current_temp = current_temp - alpha
 
-            print(round(current_state.total, 2))
+            print(current_state.total)
         
         return current_state
