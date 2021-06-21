@@ -7,7 +7,8 @@ from copy import deepcopy
 class Simulated_annealing():
 
     def __init__(self, empty_graph, number_houses):
-        self.start_map = Randomise(empty_graph, number_houses, 400).winner
+        # self.start_map = Randomise(empty_graph, number_houses, 400).winner
+        self.start_map = empty_graph
         self.calc_price(self.start_map)
         self.end_result = self.simulated_annealing(self.start_map)
 

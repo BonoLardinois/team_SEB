@@ -60,8 +60,8 @@ if __name__ == "__main__":
     results = []
     winner = None
     counter = 0
-    for i in range(1):
-        starting_graph = Randomise(empty_graph, number_of_houses, 1)
+    for i in range(3):
+        starting_graph = Randomise(empty_graph, number_of_houses, 400)
         winner_graph = HillClimber(starting_graph.winner)
         results.append(winner_graph.winner.total_real)
 
@@ -76,8 +76,9 @@ if __name__ == "__main__":
 
         counter += 1
         # print(counter) 
-
-    visualise(winner.winner.all_land_objects, winner.winner.total_real, len(winner.winner.all_land_objects))
+    winner = Simulated_annealing(winner_graph.winner, number_of_houses).end_result
+    visualise(winner.all_land_objects, winner.total, len(winner.all_land_objects))
+    # visualise(winner.winner.all_land_objects, winner.winner.total_real, len(winner.winner.all_land_objects))
 
     # ---------------------------------------------------------------------
 
