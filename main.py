@@ -37,41 +37,41 @@ if __name__ == "__main__":
     # visualise(winner.winner.all_land_objects, winner.winner.total, len(winner.winner.all_land_objects))
 
 
-    # --------------------------- Genetic ---------------------------
-    # empty_graph = Land(f"data/{wijk_number}.csv")
-    # winner_graph = Genetic(empty_graph, number_of_houses, 200)
+    #--------------------------- Genetic ---------------------------
+    empty_graph = Land(f"data/{wijk_number}.csv")
+    winner_graph = Genetic(empty_graph, number_of_houses, 100)
 
-    # counter = 0
-    # for land_object in winner_graph.winner.all_land_objects:
-    #     if land_object.name != 'water':
-    #         counter += 1
+    counter = 0
+    for land_object in winner_graph.winner.all_land_objects:
+        if land_object.name != 'water':
+            counter += 1
 
-    # visualise(winner_graph.winner.all_land_objects, winner_graph.winner.total, f"Number of houses: {counter}")
+    visualise(winner_graph.winner.all_land_objects, winner_graph.winner.total, f"{counter} houses")
     
 
     # # --------------------------- Simulated annealing  --------------------------
-    empty_graph = Land(f"data/{wijk_number}.csv")
-    winner = Simulated_annealing(empty_graph, number_of_houses).end_result
-    visualise(winner.all_land_objects, winner.total, len(winner.all_land_objects))
+    # empty_graph = Land(f"data/{wijk_number}.csv")
+    # winner = Simulated_annealing(empty_graph, number_of_houses).end_result
+    # visualise(winner.all_land_objects, winner.total, len(winner.all_land_objects))
 
     # --------------------------- Hill Climber  --------------------------
-    empty_graph = Land(f"data/{wijk_number}.csv")
-    results = []
-    winner = None
-    counter = 0
-    for i in range(1):
-        starting_graph = Randomise(empty_graph, number_of_houses, 10)
-        winner_graph = HillClimber(starting_graph.winner)
-        results.append(winner_graph.winner.total_real)
+    # empty_graph = Land(f"data/{wijk_number}.csv")
+    # results = []
+    # winner = None
+    # counter = 0
+    # for i in range(1):
+    #     starting_graph = Randomise(empty_graph, number_of_houses, 10)
+    #     winner_graph = HillClimber(starting_graph.winner)
+    #     results.append(winner_graph.winner.total_real)
 
-        if winner == None:
-            winner = winner_graph
-        if winner_graph.winner.total_real > winner.winner.total_real:
-            winner = winner_graph
-        counter += 1
-        print(counter) 
+    #     if winner == None:
+    #         winner = winner_graph
+    #     if winner_graph.winner.total_real > winner.winner.total_real:
+    #         winner = winner_graph
+    #     counter += 1
+    #     print(counter) 
 
-    visualise(winner.winner.all_land_objects, winner.winner.total_real)
+    # visualise(winner.winner.all_land_objects, winner.winner.total_real)
 
     # ---------------------------------------------------------------------
 

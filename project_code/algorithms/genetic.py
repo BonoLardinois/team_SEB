@@ -6,14 +6,14 @@ from project_code.algorithms.randomise import randomise_coordinates
 from copy import deepcopy
 from project_code.algorithms.rotation import rotation
 import matplotlib.pyplot as plt
-from random import choice, randrange
+from random import choice
 from .helpers import swap_with_random_rotation
 
 DIRECTIONS = ["UP","RIGHT","DOWN","LEFT","TOP_RIGHT", "BOTTOM_RIGHT", "TOP_LEFT", "BOTTOM_LEFT"]
-STEPS = randrange(1, 10)
-NR_MOVES = 10
-GENERATIONS = 5
-TOP_X = 20
+STEPS = 1
+NR_MOVES = 20
+GENERATIONS = 500
+TOP_X = 10
 
 
 def do_random_move(land):
@@ -112,7 +112,12 @@ class Genetic():
                 price = values[6]
                 overlap = True
                 placement = choice(['horizontal', 'vertical'])
+                counter = 0
                 while (overlap):
+                    if counter == 200:
+                        counter = 0
+                        break
+               
                     # get coordinates
                     coordinates = randomise_coordinates(width_with_required_free_space, depth_with_required_free_space)
 
@@ -131,6 +136,7 @@ class Genetic():
 
                     # check if overlap
                     overlap = housing_map.overlap(house) 
+                    counter += 1
 
         return (housing_map)
 
@@ -184,6 +190,12 @@ class Genetic():
 
                     new_generation.append((swapped_map, value))
 
+                    # new_map = do_random_move(new_map)
+                    # new_map.calculate_distance(new_map.all_land_objects)
+                    # value = new_map.calculate_price(new_map.all_land_objects)
+
+                    # new_generation.append((new_map, value))
+
                             
                 new_generation.append(generation[g])
             
@@ -209,9 +221,9 @@ class Genetic():
         plt.plot(total_generations, results)
         plt.xlabel('x axis')
         plt.ylabel('y axis') 
-        plt.title('Graph')
+        plt.title('Increase Number of Steps')
         plt.margins(0,0)
-        plt.savefig('output/genetic_graph.png')
+        plt.savefig('output/increase_nr_steps_20.png')
 
         # return the housing map with the best value
         return generation[0][0]

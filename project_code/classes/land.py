@@ -31,8 +31,8 @@ class Land():
         # checks all land objects if overlap return true
         for land_object in self.all_land_objects:
             if land_object.name != 'water':
-                # if house.polygon_free_space.intersects(land_object.polygon) == True or land_object.polygon_free_space.intersects(house.polygon_free_space) == True:
-                if house.polygon.intersects(land_object.polygon) == True:
+                if house.polygon_free_space.intersects(land_object.polygon) == True or land_object.polygon_free_space.intersects(house.polygon_free_space) == True:
+                # if house.polygon.intersects(land_object.polygon) == True:
                     return True        
             elif land_object.name == 'water':
                 if land_object.polygon.intersects(house.polygon) == True:
@@ -97,15 +97,15 @@ class Land():
         for house in houses:
             
             if house.name == "familyhome":
-                house.price = 285000 + (285000 * 0.03 * house.nearest_neighbour) + (house.fine * 100000)
+                house.price = 285000 + (285000 * 0.03 * house.nearest_neighbour) + (house.fine * 1000000)
                 self.total += house.price
 
             elif house.name == "bungalow":                
-                house.price = 399000 + (399000 * 0.04 * house.nearest_neighbour) + (house.fine * 100000)
+                house.price = 399000 + (399000 * 0.04 * house.nearest_neighbour) + (house.fine * 1000000)
                 self.total += house.price
 
             elif house.name == "maison":                
-                house.price = 610000 + (610000 * 0.06 * house.nearest_neighbour) + (house.fine * 100000)
+                house.price = 610000 + (610000 * 0.06 * house.nearest_neighbour) + (house.fine * 1000000)
                 self.total += house.price
         return self.total
 
@@ -133,15 +133,15 @@ class Land():
 
         for house in houses:
             if house.name == "familyhome":
-                house.price = 285000 + (285000 * 0.03 * math.floor(house.nearest_neighbour)) + (house.fine * 100000)
+                house.price = 285000 + (285000 * 0.03 * math.floor(house.nearest_neighbour)) + (house.fine * 1000000)
                 self.total_real += house.price
 
             elif house.name == "bungalow":
-                house.price = 399000 + (399000 * 0.04 * math.floor(house.nearest_neighbour)) + (house.fine * 100000)
+                house.price = 399000 + (399000 * 0.04 * math.floor(house.nearest_neighbour)) + (house.fine * 1000000)
                 self.total_real += house.price
 
             elif house.name == "maison":
-                house.price = 610000 + (610000 * 0.06 * math.floor(house.nearest_neighbour)) + (house.fine * 100000)
+                house.price = 610000 + (610000 * 0.06 * math.floor(house.nearest_neighbour)) + (house.fine * 1000000)
                 self.total_real += house.price
         
         return self.total_real

@@ -37,7 +37,7 @@ def visualise(land_objects, total, number_land_objects, out_path="output/test.pn
 
     #normal plot
     plt.plot(180 , 160)
-    plt.title(f'Housing map, total: {total}, number land objects: {number_land_objects}')
+    plt.title(f'Housing map, total: {total},  {number_land_objects}')
     plt.xlabel('width')
     plt.ylabel('depth')
     plt.margins(0,0)
