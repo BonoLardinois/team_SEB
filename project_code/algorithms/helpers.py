@@ -179,7 +179,6 @@ def move_house(start_map):
     if move == 'down_right':
         new_coordinates = tuple((old_house.bottom_left[0] + 2, old_house.bottom_left[1] - 2))
         new_house = make_new_house(new_coordinates, old_house)
-
         copy_start_map.all_land_objects.remove(old_house)
 
         if copy_start_map.check_valid(new_house) == True:
@@ -192,7 +191,6 @@ def move_house(start_map):
     if move == 'up':
         new_coordinates = tuple((old_house.bottom_left[0], old_house.bottom_left[1] + 2))
         new_house = make_new_house(new_coordinates, old_house)
-
         copy_start_map.all_land_objects.remove(old_house)
 
         if copy_start_map.check_valid(new_house) == True:
@@ -200,10 +198,10 @@ def move_house(start_map):
             price = calc_price(copy_start_map)
             if price >= highest_price:
                 highest_price = price
-                best_map = copy_start_map
-    
+                best_map = copy_start_map   
 
     if move == 'down':
+
         new_coordinates = tuple((old_house.bottom_left[0], old_house.bottom_left[1] - 2))
         new_house = make_new_house(new_coordinates, old_house)
 

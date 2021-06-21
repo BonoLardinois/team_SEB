@@ -31,10 +31,8 @@ class Land():
         # checks all land objects if overlap return true
         for land_object in self.all_land_objects:
             if land_object.name != 'water':
-
                 # with constraints
                 if house.polygon_free_space.intersects(land_object.polygon) == True or land_object.polygon_free_space.intersects(house.polygon_free_space) == True:
-                
                 # without constraints
                 # if house.polygon.intersects(land_object.polygon) == True:
                     return True        
