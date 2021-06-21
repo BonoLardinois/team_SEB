@@ -3,6 +3,7 @@ import math
 from .render_randomise import Randomise
 from .helpers import swap_with_random_rotation, rotate, move_house
 from copy import deepcopy
+import matplotlib.pyplot as plt
 
 class Simulated_annealing():
 
@@ -19,9 +20,9 @@ class Simulated_annealing():
     
     def simulated_annealing(self, start_map):
         # temp bepalen aan de hand van plotje. niet nooit verslechteren. 
-        temp = 86858
-        alpha = 0.1
-        final_temp = 0.99
+        temp = 76001
+        alpha = 1
+        final_temp = 1
 
         current_temp = temp
 
@@ -29,9 +30,11 @@ class Simulated_annealing():
         counter = 0
         counter2 = 0
         price_counter = 0
+        current_temp_list = []
+        current_price = []
 
         while current_temp > final_temp:
-
+            current_temp_list.append(current_temp)
             # next_move = random.choice(['rotate', 'move', 'swap'])
             
             # iets doen met de huidige map
@@ -54,32 +57,39 @@ class Simulated_annealing():
 
             # checken wat het vershil in totale prijs is
             price_new_map = self.calc_price(new_map)
-
+            
+            # calc difference between new and old state
             difference = price_new_map - current_state.total
-            if counter2 <= 25:
+            
+            # add current price to graph
+
+            current_price.append(current_state.total)
+            if counter2 <= 10:
                 if difference == 0.0:
                     counter += 1
-                    if counter == 3:
+                    if counter == 8:
                         counter = 0
                         counter2 += 1
-                        if counter2 <= 30:
-                            current_temp = 6500
+                        current_temp = 76000
+                        # if counter2 == 25:
+                        #     break
                 else:
                     counter = 0 
-                # print(counter)
+                print(counter)
                 
-                # print(counter2)
+                print(counter2)
 
-            # print(f"difference: {difference}")
+            print(f"difference: {difference}")
+            print(f"current temp: {current_temp}")
 
             # if price stays the same for 10000 times the algoritm stops
-            print(price_counter)
-            if price_new_map == current_state.total:
-                price_counter += 1
-                if price_counter >= 10000:
-                    return current_state
-            else:
-                price_counter = 0
+            # print(price_counter)
+            # if price_new_map == current_state.total:
+            #     price_counter += 1
+            #     if price_counter >= 1000:
+            #         break
+            # else:
+            #     price_counter = 0
 
             # if the new map is better then the old map then it replaces it
             if difference >= 0.0:
@@ -93,5 +103,11 @@ class Simulated_annealing():
             current_temp = current_temp - alpha
 
             print(current_state.total)
+
+        plt.plot(current_temp_list, current_price)
+        plt.xlabel('x - axis')
+        plt.ylabel('y - axis') 
+        plt.title('Iteration graph')
+        plt.savefig('output/iteration_graph.png')
         
         return current_state
