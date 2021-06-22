@@ -4,6 +4,7 @@ from sys import argv
 from project_code.algorithms.render_randomise import Randomise
 from project_code.algorithms.genetic import Genetic
 from project_code.algorithms.hillclimberswap import Hillclimber
+from project_code.algorithms.hillclimber import HillClimber
 from project_code.algorithms.simulated_annealing import Simulated_annealing
 import cProfile
 import csv
