@@ -3,6 +3,8 @@
 # hillclimberswap.py
 #
 # - HillClimber algorithm that swaps houses when beneficial to value of map.
+# - Swaps two houses and checks if this is valid
+# - if valid compare the two maps and choose the highest
 
 from .render_randomise import Randomise
 import random
@@ -15,12 +17,18 @@ class Hillclimber():
         self.winner = self.run(iterations, empty_graph, number_houses, iterations_randomise)
 
     def random_choice(self, choices):
+    '''
+    Makes random choice
+    '''
         return (random.choice(choices))
 
     def run(self, iterations, empty_graph, number_houses, iterations_randomise):
+    '''
+    Runs swap alogoritm for n iterations and returns the highest scoring map
+    '''
         highest_scoring_map = Randomise(empty_graph, number_houses, iterations_randomise).winner
         print(f"price after randomise: {highest_scoring_map.total}")
-
+        
         for n in range(iterations):
             copy_highest_scoring_map = deepcopy(highest_scoring_map)
 

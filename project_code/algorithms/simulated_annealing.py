@@ -3,6 +3,8 @@
 # simulated_annealing.py
 #
 # - Simulated Annealing algorithm.
+# - probabillity of accepting a worse map drops when the temperatur drops
+# - eventually returns the map close to the global opitmum 
 
 import random
 import math
@@ -19,13 +21,19 @@ class Simulated_annealing():
         self.end_result = self.simulated_annealing(self.start_map)
 
     def calc_price(self, land_map):
+        '''
+        Calculates total price of a map
+        '''
         land_map.calculate_distance(land_map.all_land_objects)
         price = land_map.calculate_price(land_map.all_land_objects)
         # print(price)
         return price
     
     def simulated_annealing(self, start_map):
-        # temp bepalen aan de hand van plotje. niet nooit verslechteren. 
+        '''
+        Performce
+        '''
+        # setting starting temperatur
         temp = 76001
         alpha = 1
         final_temp = 0.99
@@ -38,54 +46,40 @@ class Simulated_annealing():
         price_counter = 0
 
         while current_temp > final_temp:
-
-            # next_move = random.choice(['rotate', 'move', 'swap'])
-            
-            # iets doen met de huidige map
             highest_map = current_state
 
-            # - draaien
+            # rotate house
             rotated_map = rotate(highest_map)
             highest_map = rotated_map
 
-            # - verplaatsen 
+            # move house
             moved_map = move_house(highest_map)
             highest_map = moved_map
 
-            # - verwisselen
+            # swap two houses
             swapped_map = swap_with_random_rotation(highest_map)
             highest_map = swapped_map
 
             # new_map = moved_map
             new_map = highest_map
 
-            # checken wat het vershil in totale prijs is
+            # calculate difference in price
             price_new_map = self.calc_price(new_map)
 
             difference = price_new_map - current_state.total
+            
+            # if a shoulder is being reached then the algoritm reheats
             if counter2 <= 10:
                 if difference == 0.0:
                     counter += 1
-                    if counter == 3:
+                    if counter == 4:
                         counter = 0
                         counter2 += 1
-                        if counter2 <= 30:
-                            current_temp = 76000
+                        current_temp = 76000
                 else:
                     counter = 0 
-                print(counter)
-                
-                print(counter2)
 
             print(f"difference: {difference}")
-
-            # if price stays the same for 10000 times the algoritm stops
-            if price_new_map == current_state.total:
-                price_counter += 1
-                if price_counter >= 10000:
-                    return current_state
-            else:
-                price_counter = 0
 
             # if the new map is better then the old map then it replaces it
             if difference >= 0.0:
@@ -100,6 +94,5 @@ class Simulated_annealing():
 
             print(f"current temp: {current_temp}")
             print(f"value:{current_state.total}")
-            # visualise(current_state.all_land_objects, current_state.total, len(current_state.all_land_objects)) 
         
         return current_state

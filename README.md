@@ -35,6 +35,7 @@ Wel zit er een kleine bias in dit algoritme: de grote huizen worden namelijk eer
 ### HillClimber
 
 ### HillClimber Swap
+Dit algoritme kiest random 2 huizen die net van hetzelfde type zijn en verwisseld deze met elkaar. Daarna wordt er gecheckt of deze wissel wel kan zonder dat er overlap wordt veroorzaakt. Als een wissel heeft plaatsgevonden dan wordt de waarde vergeleken met de tot dan toe best scorende kaart. Is de waarde hoger dan wordt de nieuwe kaart de best scorende kaart. Dit proces vind x keer plaats, x kan de gebruiker zelf bepalen door het in te vullen in main. 
 
 ### Genetic
 Dit algoritme werkt volgens het principe van "survival of the fittest" (waarbij 'fitness' de waarde van de kaart is).  
@@ -46,7 +47,18 @@ Genetic is een population-based algoritme en er wordt dus gebruikgemaakt van mee
 
 
 ### Simulated Annealing
+Het startpunt voor de simulated annealing komt voor uit het random algoritme dat 400 keer wordt gerunt en de beste kaart uit wordt gekozen. Daarna maakt het algoritme op verschillende manieren wijzigingen aan de kaart:
+- Het eerste dat het algoritme doet is het kiezen van een random huis en deze draaien. 
+- Daarna wordt er weer een random huis gekozen en gekeken of dit verplaatst kan worden met 1 of 2 meter.
+- Als laatste stap worden er twee random huizen geselecteerd en deze met elkaar verwisseld. 
+Bij alle drie de stappen wordt er aan het einde gecheckt of deze stap wel daadwerkelijk kan of dat er dan ‘overlap’ wordt veroorzaakt. Mocht er ‘overlap’ zijn dan kan deze aanpassing niet plaatsvinden. 
 
+Wanneer er een verbetering van prijs is zal de simulated annealing deze altijd aannemen. Echter kan een verslechtering van de prijs ook worden aangenomen. Dit hangt af van de volgende vergelijking: random_number < probability. Hierbij is random nummer een nummer tussen 0 en 1. Probability krijgt zijn waarde uit de volgende formule: 
+e^((prijs van de nieuwe kaart - prijs van de oude kaart)/ huidige temperatuur)).
+De starttemperatuur is bij ons een temperatuur van 76001. Dit getal komt voor uit een berekening waarbij we uitgaan van een hele negatieve uitkomst uit het verschil tussen de nieuwe en oude kaart. Een van de grootste verschillen bij onze case is een verschil van -300.000, dit willen we dus maar heel af en toe aannemen (1% kans dat we deze aannemen). Dit hebben we ingevuld in de formule: 
+e^(-300.000/ huidige temperatuur) = 0.01 → huidige temperatuur is: 76001. 
+
+Elke keer wanneer de prijs hoger of lager is zal de huidige temperatuur met 1 zakken. Dit gebeurt totdat de temperatuur bij 0 is, dan zal van de huidige kaart een visualisatie worden gemaakt.
 
 ## Structuur
 De structuur van de code is als volgt:

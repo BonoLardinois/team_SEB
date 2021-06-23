@@ -40,7 +40,8 @@ def visualise(land_objects, total, number_land_objects, out_path="output/test.pn
     plt.title(f'Housing map, total: {total}, number land objects: {number_land_objects}')
     plt.xlabel('width')
     plt.ylabel('depth')
-    plt.margins(0,0)
+    ax.set_ylim(ymin=0)
+    ax.set_xlim(xmin=0)
     plt.savefig(out_path)
     
    
