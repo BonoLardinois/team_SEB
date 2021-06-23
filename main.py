@@ -16,7 +16,6 @@ if __name__ == "__main__":
         print("Usage: python3 main.py [type of wijk: wijk_1, wijk_2 or wijk_3] [number of houses: 20, 40 or 60] [algorithm: random, hillclimber, hillclimber_swap, genetic or simulated_annealing]")
         exit(1)
 
-    # Load the requested wijk or else wijk_1 (20 houses)
     print("Loading...")
     
     wijk_number = argv[1]
