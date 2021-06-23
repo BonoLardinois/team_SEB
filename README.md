@@ -43,7 +43,7 @@ Om dit programma te laten runnen, moet het volgende in de terminal worden aanger
 
 > python main.py [type wijk] [aantal huizen] [algoritme]
 
-- [type wijk] staat de ligging van het water in de wijk en kan bestaan uit wijk_1, wijk_2 of wijk_3 (zie het mapje 'data' voor de exacte coördinaten).
+- [type wijk] staat voor de ligging van het water in de wijk en kan bestaan uit wijk_1, wijk_2 of wijk_3 (zie het mapje 'data' voor de exacte coördinaten).
 - [aantal huizen] staat voor de huizenvariant: dit kan 20, 40 of 60 zijn.
 - [algoritme] staat voor het algoritme wat gebruikt wordt. De volgende algoritmes zijn beschikbaar: random, hillclimber, hillclimber_swap, genetic of simulated_annealing.
 
@@ -57,7 +57,7 @@ Wel zit er een kleine bias in dit algoritme: de grote huizen worden namelijk eer
 Dit algoritme krijgt als startpunt de uitkomst van het Random algoritme, vervolgens pakt het algoritme steeds 1 huis en kijkt naar de 8 bewegingen die het huis kan maken. Van alle geldige stappen wordt de meest waardevolle uiteindelijk uitgevoerd. Alle huizen worden afgegaan met een for loop. Er worden 55 for loops gedaan waar de eerste stappen beginnen met 8 vakjes en het bouwt af tot aan 1 vakje per stap.
 
 ### HillClimber Swap
-Dit algoritme kiest random 2 huizen die net van hetzelfde type zijn en verwisseld deze met elkaar. Daarna wordt er gecheckt of deze wissel wel kan zonder dat er overlap wordt veroorzaakt. Als een wissel heeft plaatsgevonden dan wordt de waarde vergeleken met de tot dan toe best scorende kaart. Is de waarde hoger dan wordt de nieuwe kaart de best scorende kaart. Dit proces vind x keer plaats, x kan de gebruiker zelf bepalen door het in te vullen in main. 
+Dit algoritme kiest random 2 huizen die niet van hetzelfde type zijn en verwisseld deze met elkaar. Daarna wordt er gecheckt of deze wissel wel kan zonder dat er overlap wordt veroorzaakt. Als een wissel heeft plaatsgevonden dan wordt de waarde vergeleken met de tot dan toe best scorende kaart. Is de waarde hoger dan wordt de nieuwe kaart de best scorende kaart. Dit proces vind x keer plaats, x kan de gebruiker zelf bepalen door het in te vullen in main. 
 
 ### Genetic
 Dit algoritme werkt volgens het principe van "survival of the fittest" (waarbij 'fitness' de waarde van de kaart is).  
