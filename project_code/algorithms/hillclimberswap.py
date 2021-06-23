@@ -23,9 +23,9 @@ class Hillclimber():
         return (random.choice(choices))
 
     def run(self, iterations, empty_graph, number_houses, iterations_randomise):
-    '''
-    Runs swap alogoritm for n iterations and returns the highest scoring map
-    '''
+        '''
+        Runs swap alogoritm for n iterations and returns the highest scoring map
+        '''
         highest_scoring_map = Randomise(empty_graph, number_houses, iterations_randomise).winner
         print(f"price after randomise: {highest_scoring_map.total}")
         

@@ -38,7 +38,7 @@ if __name__ == "__main__":
 
     if argv[3] == "hillclimber_swap":
         empty_graph = Land(f"data/{wijk_number}.csv")
-        winner = Hillclimber(empty_graph, number_of_houses, 100, 4)
+        winner = Hillclimber(empty_graph, number_of_houses, 100, 10000)
         visualise(winner.winner.all_land_objects, winner.winner.total, len(winner.winner.all_land_objects))
 
 
