@@ -12,7 +12,7 @@ import csv
 if __name__ == "__main__":
 
     # Check command line arguments
-    if len(argv) not in [3]:
+    if len(argv) not in [4]:
         print("Usage: python3 main.py [type of wijk: wijk_1, wijk_2 or wijk_3] [number of houses: 20, 40 or 60] [algorithm: random, hillclimber, hillclimber_swap, genetic or simulated_annealing]")
         exit(1)
 
@@ -29,7 +29,7 @@ if __name__ == "__main__":
     
     
     # --------------------------- Random  ---------------------------
-    
+
     if argv[3] == "random":
         empty_graph = Land(f"data/{wijk_number}.csv")
         winner_graph = Randomise(empty_graph, number_of_houses, 400)
