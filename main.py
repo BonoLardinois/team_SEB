@@ -27,9 +27,15 @@ if __name__ == "__main__":
     
     
     # --------------------------- Random  --------------------------
-    # empty_graph = Land(f"data/{wijk_number}.csv")
-    # winner_graph = Randomise(empty_graph, number_of_houses, 400)
+    empty_graph = Land(f"data/{wijk_number}.csv")
+    winner_graph = Randomise(empty_graph, number_of_houses, 400)
     # visualise(winner_graph.winner.all_land_objects, winner_graph.winner.total, len(winner_graph.winner.all_land_objects))
+    counter = 0
+    for land_object in winner_graph.winner.all_land_objects:
+        if land_object.name != 'water':
+            counter += 1
+
+    visualise(winner_graph.winner.all_land_objects, winner_graph.winner.total, f"{counter} houses")
 
     # # --------------------------- Hillclimber swap ---------------------------
     # empty_graph = Land(f"data/{wijk_number}.csv")
@@ -38,15 +44,15 @@ if __name__ == "__main__":
 
 
     #--------------------------- Genetic ---------------------------
-    empty_graph = Land(f"data/{wijk_number}.csv")
-    winner_graph = Genetic(empty_graph, number_of_houses, 100)
+    # empty_graph = Land(f"data/{wijk_number}.csv")
+    # winner_graph = Genetic(empty_graph, number_of_houses, 100)
 
-    counter = 0
-    for land_object in winner_graph.winner.all_land_objects:
-        if land_object.name != 'water':
-            counter += 1
+    # counter = 0
+    # for land_object in winner_graph.winner.all_land_objects:
+    #     if land_object.name != 'water':
+    #         counter += 1
 
-    visualise(winner_graph.winner.all_land_objects, winner_graph.winner.total, f"{counter} houses")
+    # visualise(winner_graph.winner.all_land_objects, winner_graph.winner.total, f"{counter} houses")
     
 
     # # --------------------------- Simulated annealing  --------------------------

@@ -11,8 +11,8 @@ from .helpers import swap_with_random_rotation
 
 DIRECTIONS = ["UP","RIGHT","DOWN","LEFT","TOP_RIGHT", "BOTTOM_RIGHT", "TOP_LEFT", "BOTTOM_LEFT"]
 STEPS = 1
-NR_MOVES = 20
-GENERATIONS = 500
+NR_MOVES = 10
+GENERATIONS = 200
 TOP_X = 10
 
 
@@ -170,8 +170,8 @@ class Genetic():
         total_generations = []
 
         generation_counter = 0
-
-
+        best_so_far = -1
+        extra_moves = 0
 
         # for a number of generations, create new generation
         for z in range(GENERATIONS):
@@ -183,8 +183,8 @@ class Genetic():
                     new_map = deepcopy(generation[g][0]) 
 
                     swapped_map = swap_with_random_rotation(new_map)
-
-                    swapped_map = do_random_move(swapped_map)
+                    for _ in range( 1 + extra_moves):
+                        swapped_map = do_random_move(swapped_map)
                     swapped_map.calculate_distance(swapped_map.all_land_objects)
                     value = swapped_map.calculate_price(swapped_map.all_land_objects)
 
@@ -202,12 +202,18 @@ class Genetic():
             # sort this new generation by value and keep top X
             new_generation = sorted(new_generation,key=lambda z : z [1], reverse=True)
             generation = new_generation[:TOP_X]
-
+            # if generation[0][1]  == best_so_far:
+            #     extra_moves += 1
+            # else:
+            #     extra_moves = 0 
+            # best_so_far = generation [0][1]
             # for i in range(5): 
             #     visualise(generation[i][0].all_land_objects,generation[0][1],f'output/intermediate_generation{z}__{i}.png')
 
             # print value of the best map from this new generation
-            print(new_generation[0][1])
+            value = round(new_generation[0][1])
+            print(f"Generation number: {generation_counter}")
+            print(value)
         
             # keep track of iterations
             generation_counter += 1
@@ -218,12 +224,12 @@ class Genetic():
 
         
         # visualise iterations graph
-        plt.plot(total_generations, results)
-        plt.xlabel('x axis')
-        plt.ylabel('y axis') 
-        plt.title('Increase Number of Steps')
-        plt.margins(0,0)
-        plt.savefig('output/increase_nr_steps_20.png')
+        # plt.plot(total_generations, results)
+        # plt.xlabel('x axis')
+        # plt.ylabel('y axis') 
+        # plt.title('Increase Number of Steps')
+        # plt.margins(0,0)
+        # plt.savefig('output/increase_nr_steps_20.png')
 
         # return the housing map with the best value
         return generation[0][0]

@@ -3,7 +3,7 @@ import matplotlib.patches as patches
 # from mpl_toolkits.mplot3d import Axes3D
 # from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 
-def visualise(land_objects, total, number_land_objects, out_path="output/test.png"):
+def visualise(land_objects, total, number_land_objects, out_path="output/20huizen_wijk1.png"):
 
     # Create data
     fig, ax = plt.subplots()
@@ -37,7 +37,7 @@ def visualise(land_objects, total, number_land_objects, out_path="output/test.pn
 
     #normal plot
     plt.plot(180 , 160)
-    plt.title(f'Housing map, total: {total},  {number_land_objects}')
+    plt.title(f'Housing map, total: {total}, Number of houses: {number_land_objects}')
     plt.xlabel('width')
     plt.ylabel('depth')
     plt.margins(0,0)
