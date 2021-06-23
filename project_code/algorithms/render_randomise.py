@@ -21,13 +21,16 @@ class Randomise():
         self.winner = self.run(housing_map, number_houses, iterations)
 
     def calculate_houses(self, number_houses):
+        '''
+        Calculates how many houses need to be placed
+        '''
         self.maisons = int(0.15 * number_houses)
         self.bungalows = int(0.25 * number_houses)
         self.familyhomes = int(0.6 * number_houses)
 
     def load_houses(self, number_houses, housing_map):
         '''
-        function to load all houses in a specific neighbourhood
+        Function to load all houses in a specific neighbourhood
         '''
         numb_maisons = int(0.15 * number_houses)
         numb_bungalows = int(0.25 * number_houses)
@@ -81,7 +84,7 @@ class Randomise():
         
     def run(self, housing_map, number_houses, iterations):
         '''
-        function for generating maps with randomly placed houses and picking the highest value map
+        Function for generating maps with randomly placed houses and picking the highest value map
         '''
 
         highest_scoring_map = None
