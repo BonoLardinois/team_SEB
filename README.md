@@ -20,7 +20,7 @@ Of via conda:
 ## Gebruik
 Om dit programma te laten runnen, moet het volgende in de terminal worden aangeroepen:  
 
-python main.py [type wijk] [aantal huizen] [algoritme]
+> python main.py [type wijk] [aantal huizen] [algoritme]
 
 - [type wijk] staat de ligging van het water in de wijk en kan bestaan uit wijk_1, wijk_2 of wijk_3 (zie het mapje 'data' voor de exacte coördinaten).
 - [aantal huizen] staat voor de huizenvariant: dit kan 20, 40 of 60 zijn.
