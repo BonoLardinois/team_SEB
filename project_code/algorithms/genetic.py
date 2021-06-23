@@ -6,7 +6,6 @@
 # - Creates multiple generations of maps and attempts to find the highest score.
 
 from project_code.classes.house import House
-from project_code.visualisations.visualise import visualise
 from copy import deepcopy
 from project_code.algorithms.helpers import rotation, randomise_coordinates
 import matplotlib.pyplot as plt
@@ -37,7 +36,7 @@ def do_random_move(land):
     for x in range(100):
         # get random direction
         direction = choice(DIRECTIONS)
-        # move houses by 1 coordinate
+        # move houses by STEPS number of coordinates
         if direction == "UP":
             house.move(0,STEPS)
         elif direction == "RIGHT":
@@ -65,10 +64,9 @@ def check_valid(land, house):
     '''
     Function to check for overlap (doesn't append land_objects)
     '''
-    # for the genetic algorithm, we don't want to append as we'll get endless copies of houses we've moved
     if not house.check_bounds(land.width, land.depth):
         return False
-    # checks all land objects if overlap return true
+    # checks all land objects; if no overlap, return true
     for land_object in land.all_land_objects:
         if land_object.name != 'water':
             if house.polygon_free_space.intersects(land_object.polygon) == True or land_object.polygon_free_space.intersects(house.polygon_free_space) == True:
@@ -172,13 +170,14 @@ class Genetic():
         generation = sorted(generation,key=lambda z : z[1],reverse=True)
         # print(generation[0][1])
 
-
+        # define variables for generation graph
         results = []
         total_generations = []
-
         generation_counter = 1
 
-
+        # define variables to increase number of moves if best map remains the same
+        best_so_far = -1
+        extra_moves = 0
 
         # for a number of generations, create new generation
         for z in range(GENERATIONS):
@@ -190,13 +189,12 @@ class Genetic():
                     new_map = deepcopy(generation[g][0]) 
 
                     swapped_map = swap_with_random_rotation(new_map)
-
-                    swapped_map = do_random_move(swapped_map)
+                    for _ in range( 1 + extra_moves):
+                        swapped_map = do_random_move(swapped_map)
                     swapped_map.calculate_distance(swapped_map.all_land_objects)
                     value = swapped_map.calculate_price(swapped_map.all_land_objects)
 
                     new_generation.append((swapped_map, value))
-
                             
                 new_generation.append(generation[g])
             
@@ -204,21 +202,25 @@ class Genetic():
             new_generation = sorted(new_generation,key=lambda z : z [1], reverse=True)
             generation = new_generation[:TOP_X]
 
-            # for i in range(5): 
-            #     visualise(generation[i][0].all_land_objects,generation[0][1],f'output/intermediate_generation{z}__{i}.png')
+            # if the best map of the previous generation has the same value as the new one, 
+            # increase the number of moves
+            if generation[0][1]  == best_so_far:
+                extra_moves += 1
+            else:
+                extra_moves = 0 
+            best_so_far = generation [0][1]
 
-            # print value of the best map from this new generation
-            print(f"Generation no. {generation_counter}")
-            print(new_generation[0][1])
-        
             # keep track of generations
             generation_counter += 1
             total_generations.append(generation_counter)
 
-
             results.append(new_generation[0][1])
 
-        
+            # print value of the best map from this new generation
+            value = round(new_generation[0][1])
+            print(f"Generation number: {generation_counter}")
+            print(value)
+
         # visualise generations graph
         plt.plot(total_generations, results)
         plt.xlabel('x axis')
