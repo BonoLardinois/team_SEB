@@ -1,3 +1,9 @@
+# Team SEB 
+# Minor Programmeren (Programmeertheorie)  
+# simulated_annealing.py
+#
+# - Simulated Annealing algorithm.
+
 import random
 import math
 from .render_randomise import Randomise

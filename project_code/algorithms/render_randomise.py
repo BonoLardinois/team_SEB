@@ -1,10 +1,13 @@
-from project_code.classes.land import Land
+# Team SEB 
+# Minor Programmeren (Programmeertheorie)  
+# render_randomise.py
+#
+# - Randomise algorithm; places land objects on map using random coordinates.
+
 from project_code.classes.house import House
-from shapely.geometry import Polygon
 import random
-from project_code.algorithms.randomise import randomise_coordinates
 from copy import deepcopy
-from project_code.algorithms.rotation import rotation
+from project_code.algorithms.helpers import rotation, randomise_coordinates
 
 
 class Randomise():

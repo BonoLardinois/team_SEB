@@ -1,3 +1,9 @@
+# Team SEB 
+# Minor Programmeren (Programmeertheorie)  
+# hillclimber.py
+#
+# - HillClimber algorithm.
+
 from project_code.classes.land import Land
 from project_code.classes.house import House
 from copy import deepcopy
@@ -39,7 +45,7 @@ class HillClimber():
         results = []
         total_iterations = []
 
-         for i in range(iterations):
+        for i in range(iterations):
 
             if i < 7:
                 steps = 8

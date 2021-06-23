@@ -1,3 +1,9 @@
+# Team SEB 
+# Minor Programmeren (Programmeertheorie)  
+# render_randomise.py
+#
+# - Water class.
+
 class Water():
 
     def __init__(self, bottom_left, top_right, polygon):

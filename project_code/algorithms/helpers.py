@@ -1,12 +1,49 @@
+# Team SEB 
+# Minor Programmeren (Programmeertheorie)  
+# helpers.py
+#
+# - Performs helper functions.
+
 import random
-from copy import deepcopy
-from project_code.algorithms.rotation import rotation
 from project_code.classes.house import House
 from shapely.geometry import Polygon
+from copy import deepcopy
 
+
+def randomise_coordinates(width, depth):
+    x = random.randrange(0,(180 + 1 - width))
+    y = random.randrange(0,(160 + 1 - depth))
+    
+    return tuple((x, y))
 
 def random_choice(choices):
     return (random.choice(choices))
+
+def rotation(coordinates, width, depth, placement, required_free_space): 
+    if placement == 'vertical':
+        # calculating new width and depth
+        copy_width = deepcopy(width)
+        copy_width_required_free_space = deepcopy(width + (2 * required_free_space))
+
+        width = depth
+        depth = copy_width
+        width_with_required_free_space = depth + (2 * required_free_space)
+        depth_with_required_free_space = copy_width_required_free_space
+        
+
+        # making polygons
+        polygon = Polygon([(coordinates[0] + required_free_space, coordinates[1] + required_free_space), (coordinates[0] + width + required_free_space, coordinates[1] + required_free_space), (coordinates[0] + width + required_free_space, coordinates[1] + depth + required_free_space), (coordinates[0] + required_free_space, coordinates[1] + depth + required_free_space)])
+        polygon_free_space = Polygon([coordinates, (coordinates[0] + width_with_required_free_space, coordinates[1]), (coordinates[0] + width_with_required_free_space, coordinates[1] + depth_with_required_free_space), (coordinates[0], coordinates[1] + depth_with_required_free_space)])
+
+    if placement == 'horizontal':
+        # making polygons
+        width_with_required_free_space = width +(2 * required_free_space)
+        depth_with_required_free_space = depth + (2 * required_free_space)
+        polygon = Polygon([(coordinates[0] + required_free_space, coordinates[1] + required_free_space), (coordinates[0] + width + required_free_space, coordinates[1] + required_free_space), (coordinates[0] + width + required_free_space, coordinates[1] + depth + required_free_space), (coordinates[0] + required_free_space, coordinates[1] + depth + required_free_space)])
+        polygon_free_space = Polygon([coordinates, (coordinates[0] + width_with_required_free_space, coordinates[1]), (coordinates[0] + width_with_required_free_space, coordinates[1] + depth_with_required_free_space), (coordinates[0], coordinates[1] + depth_with_required_free_space)])
+
+
+    return (width, depth, polygon, polygon_free_space)
 
 def swap_with_random_rotation(start_map):
     copy_start_map = deepcopy(start_map)

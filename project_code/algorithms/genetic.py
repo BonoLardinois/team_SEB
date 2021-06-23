@@ -1,18 +1,22 @@
-from project_code.classes.land import Land
+# Team SEB 
+# Minor Programmeren (Programmeertheorie)  
+# genetic.py
+#
+# - Genetic algorithm; 
+# - Creates multiple generations of maps and attempts to find the highest score.
+
 from project_code.classes.house import House
 from project_code.visualisations.visualise import visualise
-from shapely.geometry import Polygon
-from project_code.algorithms.randomise import randomise_coordinates
 from copy import deepcopy
-from project_code.algorithms.rotation import rotation
+from project_code.algorithms.helpers import rotation, randomise_coordinates
 import matplotlib.pyplot as plt
-from random import choice, randrange
+from random import choice
 from .helpers import swap_with_random_rotation
 
 DIRECTIONS = ["UP","RIGHT","DOWN","LEFT","TOP_RIGHT", "BOTTOM_RIGHT", "TOP_LEFT", "BOTTOM_LEFT"]
-STEPS = randrange(1, 10)
+STEPS = 1
 NR_MOVES = 10
-GENERATIONS = 5
+GENERATIONS = 200
 TOP_X = 20
 
 

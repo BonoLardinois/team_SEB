@@ -1,14 +1,18 @@
-from copy import deepcopy
+# Team SEB 
+# Minor Programmeren (Programmeertheorie)  
+# land.py
+#
+# - Renders land for land objects.
+# - Checks validity of houses.
+# - Calculates price of houses.
+# - Calculates distance between houses.
+
 import csv
 import math
 from .water import Water
 from .house import House
-from shapely.geometry import Polygon, MultiPolygon, mapping
+from shapely.geometry import Polygon, MultiPolygon
 from shapely.ops import nearest_points
-from random import choice
-
-DIRECTIONS = ["UP","RIGHT","DOWN","LEFT"]
-STEPS = 10
 
 
 class Land():

@@ -1,10 +1,13 @@
+# Team SEB 
+# Minor Programmeren (Programmeertheorie)  
+# hillclimberswap.py
+#
+# - HillClimber algorithm that swaps houses when beneficial to value of map.
+
 from .render_randomise import Randomise
 import random
 from copy import deepcopy
-from project_code.algorithms.rotation import rotation
-from project_code.classes.house import House
-from shapely.geometry import Polygon
-from .helpers import swap_with_random_rotation, rotate
+from .helpers import swap_with_random_rotation
 
 class Hillclimber():
 

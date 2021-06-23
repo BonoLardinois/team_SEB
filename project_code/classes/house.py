@@ -1,4 +1,9 @@
-from logging import exception
+# Team SEB 
+# Minor Programmeren (Programmeertheorie)  
+# house.py
+#
+# - House class.
+
 from shapely.geometry import Polygon
 
 
