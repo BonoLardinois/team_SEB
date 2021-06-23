@@ -17,7 +17,9 @@ class HillClimber():
         self.winner = self.run(housing_map)
 
     def valid_move(self, house, waters):
-
+        '''
+        checks if the movement of a house is valid
+        '''
         # checks if house intersects with water
         for water in waters:
             if water.polygon.intersects(house.polygon):
@@ -30,10 +32,12 @@ class HillClimber():
         return True
 
     def run(self, housing_map):
-
+        '''
+        moves all houses 55 times with steps beginning from 8 till 1
+        '''
         print("housing map value:")
         print(housing_map.total)
-        
+
         copy_map = deepcopy(housing_map)
         generations = []
         generations.append("copy_map")
