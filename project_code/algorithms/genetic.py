@@ -21,6 +21,9 @@ TOP_X = 20
 
 
 def do_random_move(land):
+    '''
+    Randomly moves houses on map and returns new map
+    '''
     # create local variables to use in both loops
     i = 0
     house = None
@@ -60,7 +63,7 @@ def do_random_move(land):
 
 def check_valid(land, house):
     '''
-    function to check for overlap (doesn't append land_objects)
+    Function to check for overlap (doesn't append land_objects)
     '''
     # for the genetic algorithm, we don't want to append as we'll get endless copies of houses we've moved
     if not house.check_bounds(land.width, land.depth):
@@ -86,13 +89,16 @@ class Genetic():
         self.winner = self.run(housing_map, number_houses, iterations)
 
     def calculate_houses(self, number_houses):
+        '''
+        Calculates how many houses need to be placed
+        '''
         self.maisons = int(0.15 * number_houses)
         self.bungalows = int(0.25 * number_houses)
         self.familyhomes = int(0.6 * number_houses)
 
     def load_houses(self, number_houses, housing_map):
         '''
-        function to load all houses in a specific neighbourhood
+        Function to load all houses in a specific neighbourhood
         '''
         numb_maisons = int(0.15 * number_houses)
         numb_bungalows = int(0.25 * number_houses)
@@ -141,6 +147,9 @@ class Genetic():
 
 
     def run(self, housing_map, number_houses, iterations):
+        '''
+        Gets multiple maps, mutates them and keeps track of highest scoring one
+        '''
         # initial generation
         generation= [] 
         
@@ -201,7 +210,7 @@ class Genetic():
             # print value of the best map from this new generation
             print(new_generation[0][1])
         
-            # keep track of iterations
+            # keep track of generations
             generation_counter += 1
             total_generations.append(generation_counter)
 
@@ -209,7 +218,7 @@ class Genetic():
             results.append(new_generation[0][1])
 
         
-        # visualise iterations graph
+        # visualise generations graph
         plt.plot(total_generations, results)
         plt.xlabel('x axis')
         plt.ylabel('y axis') 
