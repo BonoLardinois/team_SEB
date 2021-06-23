@@ -30,15 +30,16 @@ class HillClimber():
         return True
 
     def run(self, housing_map):
+
         print("housing map value:")
         print(housing_map.total)
+        
         copy_map = deepcopy(housing_map)
         generations = []
         generations.append("copy_map")
         current_best_value = copy_map.total
         counter = 0
         iterations = 55
-        # steps = 2
 
         # data for iteration graph
         iteration_counter = 0
@@ -218,7 +219,9 @@ class HillClimber():
                     generations = ["copy_map"]
 
             counter += 1
+
             print(f"counter: {counter}")
+
             # data for iteration graph
             iteration_counter += 1
             total_iterations.append(iteration_counter)
@@ -231,11 +234,6 @@ class HillClimber():
 
         print(f"total: {copy_map.total}")
         print(f"total_real: {copy_map.total_real}")
-        
-        # for house in copy_map.all_land_objects:
-        #     if house.name != "water":
-        #         # if house.nearest_neighbour < house.free_space:
-        #         print(f"fine: {house.fine}")
 
         plt.plot(total_iterations, results)
         plt.xlabel('x - axis')
