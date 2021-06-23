@@ -146,213 +146,25 @@ def move_house(start_map):
 
     choices_move = ['left', 'right', 'up', 'down', 'up_left', 'up_right', 'down_left', 'down_right','left_1', 'right_1', 'up_1', 'down_1', 'up_left_1', 'up_right_1', 'down_left_1', 'down_right_1']
 
+    direction_dict = {"left":(-2, 0), "down_left":(-2, -2), "up_left":(-2, 2), "right":(2, 0), "up_right":(2, 2), "down_right": (2, -2),
+                    "up": (0, 2), "down":(0, -2), "left_1":(-1, 0), "down_left_1":(-1, -1), "up_left_1":(-1, 1), "right_1":(1, 0),
+                    "up_right_1": (1, 1), "down_right_1":(1, -1), "up_1": (0, 1), "down_1":(0, -1)}
+
     highest_price = price_startmap
     best_map = start_map
     move = random_choice(choices_move)
     # for move in choices_move:
-    if move == 'left':
-        new_coordinates = tuple((old_house.bottom_left[0] - 2, old_house.bottom_left[1]))
-        new_house = make_new_house(new_coordinates, old_house)
-        copy_start_map.all_land_objects.remove(old_house)
+    (bottom_left_x_change , bottom_left_y_change)  = direction_dict[move]
+    new_coordinates = tuple((old_house.bottom_left[0] + bottom_left_x_change, old_house.bottom_left[1] + bottom_left_y_change))
+    new_house = make_new_house(new_coordinates, old_house)
+    copy_start_map.all_land_objects.remove(old_house)
 
-        if copy_start_map.check_valid(new_house) == True:
-            copy_start_map.all_land_objects.append(new_house)
-            price = calc_price(copy_start_map)
-            if price >= highest_price:
-                highest_price = price
-                best_map = copy_start_map
-
-    if move == 'down_left':
-        # print(old_house.bottom_left)
-        new_coordinates = tuple((old_house.bottom_left[0] - 2, old_house.bottom_left[1] - 2))
-        new_house = make_new_house(new_coordinates, old_house)
-        copy_start_map.all_land_objects.remove(old_house)
-
-        if copy_start_map.check_valid(new_house) == True:
-            copy_start_map.all_land_objects.append(new_house)
-            price = calc_price(copy_start_map)
-            if price >= highest_price:
-                highest_price = price
-                best_map = copy_start_map
-
-    if move == 'up_left':
-        # print(old_house.bottom_left)
-        new_coordinates = tuple((old_house.bottom_left[0] - 2, old_house.bottom_left[1] + 2))
-        new_house = make_new_house(new_coordinates, old_house)
-        copy_start_map.all_land_objects.remove(old_house)
-
-        if copy_start_map.check_valid(new_house) == True:
-            copy_start_map.all_land_objects.append(new_house)
-            price = calc_price(copy_start_map)
-            if price >= highest_price:
-                highest_price = price
-                best_map = copy_start_map
-            
-
-    if move == 'right':
-        new_coordinates = tuple((old_house.bottom_left[0] + 2, old_house.bottom_left[1]))
-        new_house = make_new_house(new_coordinates, old_house)
-        copy_start_map.all_land_objects.remove(old_house)
-
-        if copy_start_map.check_valid(new_house) == True:
-            copy_start_map.all_land_objects.append(new_house)
-            price = calc_price(copy_start_map)
-            if price >= highest_price:
-                highest_price = price
-                best_map = copy_start_map
-
-    if move == 'up_right':
-        new_coordinates = tuple((old_house.bottom_left[0] + 2, old_house.bottom_left[1] + 2))
-        new_house = make_new_house(new_coordinates, old_house)
-        copy_start_map.all_land_objects.remove(old_house)
-
-        if copy_start_map.check_valid(new_house) == True:
-            copy_start_map.all_land_objects.append(new_house)
-            price = calc_price(copy_start_map)
-            if price >= highest_price:
-                highest_price = price
-                best_map = copy_start_map
-
-    if move == 'down_right':
-        new_coordinates = tuple((old_house.bottom_left[0] + 2, old_house.bottom_left[1] - 2))
-        new_house = make_new_house(new_coordinates, old_house)
-        copy_start_map.all_land_objects.remove(old_house)
-
-        if copy_start_map.check_valid(new_house) == True:
-            copy_start_map.all_land_objects.append(new_house)
-            price = calc_price(copy_start_map)
-            if price >= highest_price:
-                highest_price = price
-                best_map = copy_start_map
-
-    if move == 'up':
-        new_coordinates = tuple((old_house.bottom_left[0], old_house.bottom_left[1] + 2))
-        new_house = make_new_house(new_coordinates, old_house)
-        copy_start_map.all_land_objects.remove(old_house)
-
-        if copy_start_map.check_valid(new_house) == True:
-            copy_start_map.all_land_objects.append(new_house)
-            price = calc_price(copy_start_map)
-            if price >= highest_price:
-                highest_price = price
-                best_map = copy_start_map   
-
-    if move == 'down':
-
-        new_coordinates = tuple((old_house.bottom_left[0], old_house.bottom_left[1] - 2))
-        new_house = make_new_house(new_coordinates, old_house)
-
-        copy_start_map.all_land_objects.remove(old_house)
-
-        if copy_start_map.check_valid(new_house) == True:
-            copy_start_map.all_land_objects.append(new_house)
-            price = calc_price(copy_start_map)
-            if price >= highest_price:
-                highest_price = price
-                best_map = copy_start_map
-    
-    if move == 'left_1':
-        new_coordinates = tuple((old_house.bottom_left[0] - 1, old_house.bottom_left[1]))
-        new_house = make_new_house(new_coordinates, old_house)
-        copy_start_map.all_land_objects.remove(old_house)
-
-        if copy_start_map.check_valid(new_house) == True:
-            copy_start_map.all_land_objects.append(new_house)
-            price = calc_price(copy_start_map)
-            if price >= highest_price:
-                highest_price = price
-                best_map = copy_start_map
-
-    if move == 'down_left_1':
-        # print(old_house.bottom_left)
-        new_coordinates = tuple((old_house.bottom_left[0] - 1, old_house.bottom_left[1] - 1))
-        new_house = make_new_house(new_coordinates, old_house)
-        copy_start_map.all_land_objects.remove(old_house)
-
-        if copy_start_map.check_valid(new_house) == True:
-            copy_start_map.all_land_objects.append(new_house)
-            price = calc_price(copy_start_map)
-            if price >= highest_price:
-                highest_price = price
-                best_map = copy_start_map
-
-    if move == 'up_left_1':
-        # print(old_house.bottom_left)
-        new_coordinates = tuple((old_house.bottom_left[0] - 1, old_house.bottom_left[1] + 1))
-        new_house = make_new_house(new_coordinates, old_house)
-        copy_start_map.all_land_objects.remove(old_house)
-
-        if copy_start_map.check_valid(new_house) == True:
-            copy_start_map.all_land_objects.append(new_house)
-            price = calc_price(copy_start_map)
-            if price >= highest_price:
-                highest_price = price
-                best_map = copy_start_map
-            
-
-    if move == 'right_1':
-        new_coordinates = tuple((old_house.bottom_left[0] + 1, old_house.bottom_left[1]))
-        new_house = make_new_house(new_coordinates, old_house)
-        copy_start_map.all_land_objects.remove(old_house)
-
-        if copy_start_map.check_valid(new_house) == True:
-            copy_start_map.all_land_objects.append(new_house)
-            price = calc_price(copy_start_map)
-            if price >= highest_price:
-                highest_price = price
-                best_map = copy_start_map
-
-    if move == 'up_right_1':
-        new_coordinates = tuple((old_house.bottom_left[0] + 1, old_house.bottom_left[1] + 1))
-        new_house = make_new_house(new_coordinates, old_house)
-        copy_start_map.all_land_objects.remove(old_house)
-
-        if copy_start_map.check_valid(new_house) == True:
-            copy_start_map.all_land_objects.append(new_house)
-            price = calc_price(copy_start_map)
-            if price >= highest_price:
-                highest_price = price
-                best_map = copy_start_map
-
-    if move == 'down_right_1':
-        new_coordinates = tuple((old_house.bottom_left[0] + 1, old_house.bottom_left[1] - 1))
-        new_house = make_new_house(new_coordinates, old_house)
-
-        copy_start_map.all_land_objects.remove(old_house)
-
-        if copy_start_map.check_valid(new_house) == True:
-            copy_start_map.all_land_objects.append(new_house)
-            price = calc_price(copy_start_map)
-            if price >= highest_price:
-                highest_price = price
-                best_map = copy_start_map
-
-    if move == 'up_1':
-        new_coordinates = tuple((old_house.bottom_left[0], old_house.bottom_left[1] + 1))
-        new_house = make_new_house(new_coordinates, old_house)
-
-        copy_start_map.all_land_objects.remove(old_house)
-
-        if copy_start_map.check_valid(new_house) == True:
-            copy_start_map.all_land_objects.append(new_house)
-            price = calc_price(copy_start_map)
-            if price >= highest_price:
-                highest_price = price
-                best_map = copy_start_map
-    
-
-    if move == 'down_1':
-        new_coordinates = tuple((old_house.bottom_left[0], old_house.bottom_left[1] - 1))
-        new_house = make_new_house(new_coordinates, old_house)
-
-        copy_start_map.all_land_objects.remove(old_house)
-
-        if copy_start_map.check_valid(new_house) == True:
-            copy_start_map.all_land_objects.append(new_house)
-            price = calc_price(copy_start_map)
-            if price >= highest_price:
-                highest_price = price
-                best_map = copy_start_map
+    if copy_start_map.check_valid(new_house) == True:
+        copy_start_map.all_land_objects.append(new_house)
+        price = calc_price(copy_start_map)
+        if price >= highest_price:
+            highest_price = price
+            best_map = copy_start_map
 
     return best_map
 
