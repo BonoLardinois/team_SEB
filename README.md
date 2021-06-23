@@ -5,6 +5,27 @@ Na jarenlang getouwtrek is de knoop eindelijk doorgehakt: er komt een nieuwe woo
 
 Omdat de Duivendrechtse polder ooit beschermd natuurgebied was, is de compromis dat er alleen lage vrijstaande woningen komen, om zo toch het landelijk karakter te behouden. Dit, gecombineerd met een aantal strenge restricties ten aanzien van woningaanbod en het oppervlaktewater, maakt het een planologisch uitdagende klus. De gemeente overweegt drie varianten: de 20-huizenvariant, de 40-huizenvariant en de 60-huizenvariant. Er wordt aangenomen dat een huis meer waard wordt naarmate de vrijstand toeneemt, de rekenpercentages zijn per huistype vastgesteld.
 
+### Vereisten van het project
+De wijk komt te staan op een stuk land van 180x160 meter (breed x diep). Er wordt door de planologen gerekend in hele meters.
+
+Het aantal woningen in de wijk bestaat voor 60% uit eengezinswoningen, 25% uit bungalows en 15% uit maisons.
+
+**karakteristieken huizen:**
+- Een eengezinswoning is 8x8 meter (breed x diep) en heeft een waarde van €285.000,- De woning heeft rondom twee meter vrijstand nodig; iedere meter extra levert een prijsverbetering op van 3%.
+- Een bungalow is 11x7 meter (breed x diep) en heeft een waarde van €399.000,-. De woning heeft rondom drie meter vrijstand nodig, iedere meter extra levert een prijsverbetering op van 4%.
+- Een Maison is 12x10 meter (breed x diep) en heeft een waarde van €610.000,- De woning heeft rondom zes meter vrijstand nodig, iedere meter extra levert een prijsverbetering op van 6%.
+
+De vrijstand van een woning is de kleinste afstand tot de dichtstbijzijnde andere woning in de wijk. Oftewel, voor een vrijstand van 6 meter moeten alle andere woningen in de wijk op minimaal 6 meter afstand staan. Deze afstand is bepaald als de kortste afstand tussen twee muren, dus niet vanuit het centrum van de woning.
+
+De verplichte vrijstand voor iedere woning moet binnen de kaart vallen. Overige vrijstand mag buiten de kaart worden meegerekend.
+
+In geval van percentuele waardevermeerdering per meter is de toename niet cumulatief. Een maison met twee meter extra vrijstand is dus 12.0% meer waard, niet 12.36%.
+
+De wijk bestaat voor een deel uit oppervlaktewater. Huizen mogen niet op het water worden geplaatst, maar hun vrijstand mag daar wel op vallen (zowel de verplichte als die voor de waarde berekening).
+
+**Doel:**
+Plaats de huizen zo op de kaart dat de woonwijk de hoogst mogelijke waarde oplevert.
+
 ## Installatie
 Om dit programma te laten werken, installeer eerst Python (zie https://www.python.org/downloads/)  
 In de requirements.txt staan vervolgens nog twee extra packages (Shapely en Matplotlib) die moeten worden gedownload om de code te laten runnen.  
