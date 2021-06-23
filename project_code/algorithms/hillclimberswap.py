@@ -17,9 +17,9 @@ class Hillclimber():
         self.winner = self.run(iterations, empty_graph, number_houses, iterations_randomise)
 
     def random_choice(self, choices):
-    '''
-    Makes random choice
-    '''
+        '''
+        Makes random choice
+        '''
         return (random.choice(choices))
 
     def run(self, iterations, empty_graph, number_houses, iterations_randomise):
