@@ -47,7 +47,14 @@ Genetic is een population-based algoritme en er wordt dus gebruikgemaakt van mee
 ### Simulated Annealing
 
 
+## Structuur
+De structuur van de code is als volgt:
 
+/project_code: bevat alle code van dit project
+/project_code/algorithms: bevat de code voor algoritmes
+/project_code/classes: bevat de benodigde classes voor deze case
+/project_ode/visualisation: bevat de matplotlib code voor de visualisatie
+/data: bevat drie verschillende databestanden die nodig zijn om het water in de wijk te visualiseren
 
 ## Auteurs 
 - Sebastiaan Schlundt Bodien
