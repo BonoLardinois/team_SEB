@@ -82,7 +82,7 @@ if __name__ == "__main__":
             counter += 1
             print(counter) 
 
-        visualise(winner.winner.all_land_objects, winner.winner.total_real)
+        visualise(winner.winner.all_land_objects, winner.winner.total_real, len(winner.winner.all_land_objects))
 
     # ---------------------------------------------------------------------
 

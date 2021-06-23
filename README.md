@@ -33,6 +33,7 @@ Zoals de naam al zegt, worden bij het random algoritme willekeurige huizen op de
 Wel zit er een kleine bias in dit algoritme: de grote huizen worden namelijk eerst geplaatst, zodat random iets makkelijker tot een resultaat kan komen.
 
 ### HillClimber
+Dit algoritme pakt 1 huis en kijkt naar de 8 bewegingen die het huis kan maken. Van alle stappen wordt de meest waardevolle uiteindelijk uitgevoerd. Alle huizen worden afgegaan met een for loop. Er worden 55 for loops gedaan waar de eerste stappen beginnen met 8 vakjes en het bouwt af tot aan 1 vakje per stap.
 
 ### HillClimber Swap
 Dit algoritme kiest random 2 huizen die net van hetzelfde type zijn en verwisseld deze met elkaar. Daarna wordt er gecheckt of deze wissel wel kan zonder dat er overlap wordt veroorzaakt. Als een wissel heeft plaatsgevonden dan wordt de waarde vergeleken met de tot dan toe best scorende kaart. Is de waarde hoger dan wordt de nieuwe kaart de best scorende kaart. Dit proces vind x keer plaats, x kan de gebruiker zelf bepalen door het in te vullen in main. 
