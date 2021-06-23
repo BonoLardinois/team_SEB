@@ -176,7 +176,7 @@ class Genetic():
         results = []
         total_generations = []
 
-        generation_counter = 0
+        generation_counter = 1
 
 
 
@@ -208,6 +208,7 @@ class Genetic():
             #     visualise(generation[i][0].all_land_objects,generation[0][1],f'output/intermediate_generation{z}__{i}.png')
 
             # print value of the best map from this new generation
+            print(f"Generation no. {generation_counter}")
             print(new_generation[0][1])
         
             # keep track of generations

@@ -29,7 +29,7 @@ class Land():
         
     def overlap(self, house):
         '''
-        function to check for overlap
+        Function to check for overlap between land objects
         '''
         
         # checks all land objects if overlap return true
@@ -51,7 +51,7 @@ class Land():
 
     def load_water(self, source_file):
         '''
-        function to load all water objects from csv file
+        Function to load all water objects from csv file
         '''
         with open(source_file, 'r') as in_file:
             reader = csv.reader(in_file)
@@ -70,6 +70,22 @@ class Land():
 
                 self.all_land_objects.append(water)
                 self.water.append(water)
+
+    def check_valid(land, house):
+        '''
+        Function that checks land bounds/overlap, does not append houses
+        '''
+        if not house.check_bounds(land.width, land.depth):
+            return False
+        # checks all land objects if overlap return true
+        for land_object in land.all_land_objects:
+            if land_object.name != 'water':
+                if house.polygon_free_space.intersects(land_object.polygon) == True or land_object.polygon_free_space.intersects(house.polygon_free_space) == True:
+                    return False     
+            elif land_object.name == 'water':
+                if land_object.polygon.intersects(house.polygon) == True or house.polygon.intersects(land_object.polygon) == True:
+                    return False
+        return True
          
     def calculate_distance(self, houses):
         '''
@@ -97,7 +113,7 @@ class Land():
 
     def calculate_price(self, houses):
         '''
-        Calculate price of house and total price of land
+        Calculate price of house and total price of land (not rounded)
         '''
         self.total = 0
         for house in houses:
@@ -115,26 +131,9 @@ class Land():
                 self.total += house.price
         return self.total
 
-    def check_valid(land, house):
-        '''
-        function to check for overlap (doesn't append land_objects)
-        '''
-        # for the genetic algorithm, we don't want to append as we'll get endless copies of houses we've moved
-        if not house.check_bounds(land.width, land.depth):
-            return False
-        # checks all land objects if overlap return true
-        for land_object in land.all_land_objects:
-            if land_object.name != 'water':
-                if house.polygon_free_space.intersects(land_object.polygon) == True or land_object.polygon_free_space.intersects(house.polygon_free_space) == True:
-                    return False     
-            elif land_object.name == 'water':
-                if land_object.polygon.intersects(house.polygon) == True or house.polygon.intersects(land_object.polygon) == True:
-                    return False
-        return True
-
     def calculate_price_real(self, houses):
         '''
-        Calculate price of house and total price of land
+        Calculate price of house and total price of land (rounded)
         '''
 
         for house in houses:
